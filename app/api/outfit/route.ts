@@ -24,18 +24,26 @@ Pick the BEST outfit matching the fashion style and occasion. Reply ONLY with th
   "tip": "one specific styling tip for this fashion style"
 }`
 
-    const response = await fetch('http://localhost:11434/api/generate', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+      },
       body: JSON.stringify({
-        model: 'llama3.2',
-        prompt: prompt,
-        stream: false
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 500
       })
     })
 
     const data = await response.json()
-    const text = data.response
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || 'Groq API error')
+    }
+
+    const text = data.choices[0].message.content
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('Could not parse AI response')
 

@@ -1,21 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import Navbar from '../components/Navbar'
 import Link from 'next/link'
 
-const OCCASIONS = [
-  'everyday casual', 'college', 'office', 'party',
-  'gym', 'date night', 'outdoor', 'festival'
-]
-
-const WEATHERS = [
-  'sunny & breezy', 'hot & humid', 'cold', 'rainy', 'winter'
-]
-
-const STYLES = [
-  'casual', 'streetwear', 'semi-casual', 'semi-formal',
-  'formal', 'smart casual', 'preppy', 'minimalist'
-]
+const OCCASIONS = ['everyday casual','college','office','party','gym','date night','outdoor','festival']
+const WEATHERS = ['sunny & breezy','hot & humid','cold','rainy','winter']
+const STYLES = ['casual','streetwear','semi-casual','semi-formal','formal','smart casual','preppy','minimalist']
 
 export default function OutfitPage() {
   const [items, setItems] = useState<any[]>([])
@@ -28,285 +19,170 @@ export default function OutfitPage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    async function fetchItems() {
-      const { data } = await supabase
-        .from('wardrobe_items')
-        .select('id, category, primary_color, style_tags, description, image_base64')
+    async function fetch_() {
+      const { data } = await supabase.from('wardrobe_items')
+        .select('id,category,primary_color,style_tags,description,image_base64')
       setItems(data || [])
     }
-    fetchItems()
+    fetch_()
   }, [])
 
-  async function generateOutfit() {
-    if (items.length < 2) {
-      setError('Add at least 2 items to your wardrobe first!')
-      return
-    }
-    setLoading(true)
-    setOutfit(null)
-    setOutfitItems([])
-    setError('')
-
+  async function generate() {
+    if (items.length < 2) { setError('Add at least 2 items first!'); return }
+    setLoading(true); setOutfit(null); setOutfitItems([]); setError('')
     try {
       const res = await fetch('/api/outfit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items, occasion, weather, style })
       })
       const data = await res.json()
       if (data.error) throw new Error(data.error)
-      const picked = data.outfit
-        .map((index: number) => items[index - 1])
-        .filter(Boolean)
       setOutfit(data)
-      setOutfitItems(picked)
-    } catch (err: any) {
-      setError('Error: ' + err.message)
-    }
+      setOutfitItems(data.outfit.map((i: number) => items[i - 1]).filter(Boolean))
+    } catch (e: any) { setError(e.message) }
     setLoading(false)
   }
 
-  function SectionLabel({ text }: { text: string }) {
+  function Pill({ label, active, color, onClick }: any) {
     return (
-      <p style={{
-        color: '#aaa', fontSize: 11, fontWeight: 700,
-        letterSpacing: 1.5, margin: '0 0 10px',
-        textTransform: 'uppercase'
-      }}>
-        {text}
-      </p>
+      <button onClick={onClick} style={{
+        padding: '7px 15px', borderRadius: 20, border: '1px solid',
+        borderColor: active ? color : '#eee',
+        background: active ? color : '#fff',
+        color: active ? '#fff' : '#666',
+        cursor: 'pointer', fontSize: 13, fontWeight: 500,
+        textTransform: 'capitalize', transition: 'all 0.15s'
+      }}>{label}</button>
     )
   }
 
-  function OptionButton({
-    label, active, color, onClick
-  }: {
-    label: string, active: boolean, color: string, onClick: () => void
-  }) {
-    return (
-      <button onClick={onClick} style={{
-        padding: '8px 16px', borderRadius: 20,
-        border: `1px solid ${active ? color : '#444'}`,
-        background: active ? color : 'transparent',
-        color: active ? '#fff' : '#888',
-        cursor: 'pointer', fontSize: 13,
-        textTransform: 'capitalize',
-        transition: 'all 0.15s'
-      }}>
-        {label}
-      </button>
-    )
+  function SectionLabel({ text }: any) {
+    return <p style={{ color: '#bbb', fontSize: 11, fontWeight: 700,
+      letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 10px' }}>{text}</p>
   }
 
   return (
-    <div style={{
-      maxWidth: 700, margin: '40px auto',
-      padding: '0 20px', fontFamily: 'sans-serif'
-    }}>
+    <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'system-ui, sans-serif' }}>
+      <Navbar />
+      <div style={{ maxWidth: 680, margin: '0 auto', padding: '40px 24px' }}>
 
-      {/* Header */}
-      <div style={{
-        display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', marginBottom: 32
-      }}>
-        <div>
-          <h1 style={{ fontSize: 28, fontWeight: 700, margin: 0, color: '#fff' }}>
-            Outfit Generator
-          </h1>
-          <p style={{ color: '#888', margin: '4px 0 0' }}>
-            {items.length} items in wardrobe
-          </p>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between',
+          alignItems: 'flex-end', marginBottom: 28 }}>
+          <div>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#000',
+              margin: '0 0 4px', letterSpacing: '-1px' }}>Outfit Generator</h1>
+            <p style={{ color: '#bbb', margin: 0, fontSize: 13 }}>
+              {items.length} items in wardrobe
+            </p>
+          </div>
+          <Link href="/wardrobe" style={{ padding: '8px 16px', border: '1px solid #eee',
+            color: '#555', borderRadius: 8, textDecoration: 'none', fontSize: 13 }}>
+            My Wardrobe
+          </Link>
         </div>
-        <Link href="/wardrobe" style={{
-          padding: '10px 20px', background: '#222', color: '#fff',
-          borderRadius: 8, textDecoration: 'none', fontSize: 14,
-          border: '1px solid #444'
-        }}>
-          My Wardrobe
-        </Link>
-      </div>
 
-      {/* Selectors card */}
-      <div style={{
-        background: '#1a1a1a', borderRadius: 16,
-        padding: 24, marginBottom: 24, border: '1px solid #333'
-      }}>
-
-        {/* Occasion */}
-        <div style={{ marginBottom: 20 }}>
-          <SectionLabel text="Occasion" />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {OCCASIONS.map(o => (
-              <OptionButton
-                key={o} label={o} active={occasion === o}
-                color="#6c63ff" onClick={() => setOccasion(o)}
-              />
-            ))}
+        {/* Selectors */}
+        <div style={{ border: '1px solid #f0f0f0', borderRadius: 16, padding: 24, marginBottom: 20 }}>
+          <div style={{ marginBottom: 20 }}>
+            <SectionLabel text="Occasion" />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {OCCASIONS.map(o => <Pill key={o} label={o} active={occasion===o} color="#6c63ff" onClick={() => setOccasion(o)} />)}
+            </div>
+          </div>
+          <div style={{ borderTop: '1px solid #f5f5f5', margin: '4px 0 20px' }} />
+          <div style={{ marginBottom: 20 }}>
+            <SectionLabel text="Weather" />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {WEATHERS.map(w => <Pill key={w} label={w} active={weather===w} color="#e67e22" onClick={() => setWeather(w)} />)}
+            </div>
+          </div>
+          <div style={{ borderTop: '1px solid #f5f5f5', margin: '4px 0 20px' }} />
+          <div>
+            <SectionLabel text="Fashion Style" />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {STYLES.map(s => <Pill key={s} label={s} active={style===s} color="#00b894" onClick={() => setStyle(s)} />)}
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ borderTop: '1px solid #2a2a2a', margin: '4px 0 20px' }} />
-
-        {/* Weather */}
-        <div style={{ marginBottom: 20 }}>
-          <SectionLabel text="Weather" />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {WEATHERS.map(w => (
-              <OptionButton
-                key={w} label={w} active={weather === w}
-                color="#e67e22" onClick={() => setWeather(w)}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div style={{ borderTop: '1px solid #2a2a2a', margin: '4px 0 20px' }} />
-
-        {/* Fashion Style */}
-        <div>
-          <SectionLabel text="Fashion Style" />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {STYLES.map(s => (
-              <OptionButton
-                key={s} label={s} active={style === s}
-                color="#00b894" onClick={() => setStyle(s)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Generate button */}
-      <button
-        onClick={generateOutfit}
-        disabled={loading}
-        style={{
+        {/* Generate button */}
+        <button onClick={generate} disabled={loading} style={{
           width: '100%', padding: 16,
-          background: loading ? '#2a2a2a' : 'linear-gradient(135deg, #6c63ff, #00b894)',
-          color: loading ? '#666' : '#fff',
-          border: 'none', borderRadius: 12,
-          fontSize: 18, fontWeight: 700,
-          cursor: loading ? 'not-allowed' : 'pointer',
-          marginBottom: 24
-        }}
-      >
-        {loading ? '⏳ AI is styling your outfit...' : '✨ Generate My Outfit'}
-      </button>
-
-      {/* Error */}
-      {error && (
-        <p style={{ color: '#ff6b6b', textAlign: 'center', marginBottom: 16 }}>
-          {error}
-        </p>
-      )}
-
-      {/* Result */}
-      {outfit && outfitItems.length > 0 && (
-        <div style={{
-          background: '#1a1a1a', borderRadius: 16,
-          padding: 24, border: '1px solid #6c63ff'
+          background: loading ? '#f5f5f5' : '#000',
+          color: loading ? '#aaa' : '#fff',
+          border: 'none', borderRadius: 12, fontSize: 17,
+          fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer',
+          letterSpacing: '-0.3px', marginBottom: 20
         }}>
+          {loading ? '⏳ Styling your outfit...' : '✨ Generate My Outfit'}
+        </button>
 
-          {/* Outfit title + tags */}
-          <h2 style={{
-            fontSize: 22, fontWeight: 700,
-            color: '#fff', margin: '0 0 8px'
-          }}>
-            {outfit.title}
-          </h2>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
-            {[occasion, weather, style].map(tag => (
-              <span key={tag} style={{
-                padding: '4px 12px', borderRadius: 20,
-                background: '#2a2a2a', color: '#aaa',
-                fontSize: 12, textTransform: 'capitalize'
-              }}>
-                {tag}
-              </span>
-            ))}
-          </div>
+        {error && <p style={{ color: '#e53e3e', textAlign: 'center', marginBottom: 16, fontSize: 14 }}>{error}</p>}
 
-          {/* Clothing items grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${Math.min(outfitItems.length, 4)}, 1fr)`,
-            gap: 12, marginBottom: 20
-          }}>
-            {outfitItems.map((item: any) => (
-              <div key={item.id} style={{
-                background: '#222', borderRadius: 10,
-                overflow: 'hidden', border: '1px solid #333'
-              }}>
-                <div style={{ height: 150, background: '#2a2a2a' }}>
-                  {item.image_base64
-                    ? <img
-                        src={item.image_base64}
-                        alt={item.category}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                    : <div style={{
-                        height: '100%', display: 'flex',
-                        alignItems: 'center', justifyContent: 'center', fontSize: 32
-                      }}>👕</div>
-                  }
-                </div>
-                <div style={{ padding: 10 }}>
-                  <p style={{
-                    color: '#fff', fontSize: 13, fontWeight: 600,
-                    margin: '0 0 2px', textTransform: 'capitalize'
-                  }}>
-                    {item.category}
-                  </p>
-                  <p style={{ color: '#666', fontSize: 12, margin: 0 }}>
-                    {item.primary_color}
-                  </p>
-                </div>
+        {/* Result */}
+        {outfit && outfitItems.length > 0 && (
+          <div style={{ border: '1px solid #6c63ff33', borderRadius: 16,
+            overflow: 'hidden', background: '#fff' }}>
+
+            {/* Title bar */}
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid #f5f5f5' }}>
+              <h2 style={{ fontSize: 20, fontWeight: 900, color: '#000',
+                margin: '0 0 8px', letterSpacing: '-0.5px' }}>{outfit.title}</h2>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {[occasion, weather, style].map(tag => (
+                  <span key={tag} style={{ padding: '3px 10px', borderRadius: 20,
+                    background: '#f5f5f5', color: '#888', fontSize: 12,
+                    textTransform: 'capitalize' }}>{tag}</span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Why this works */}
-          <div style={{
-            background: '#222', borderRadius: 10,
-            padding: 16, marginBottom: 12
-          }}>
-            <p style={{ color: '#aaa', fontSize: 11, fontWeight: 700,
-              letterSpacing: 1.5, margin: '0 0 6px' }}>
-              WHY THIS WORKS
-            </p>
-            <p style={{ color: '#fff', margin: 0, lineHeight: 1.6 }}>
-              {outfit.reason}
-            </p>
-          </div>
+            {/* Items */}
+            <div style={{ padding: 20,
+              display: 'grid', gap: 10,
+              gridTemplateColumns: `repeat(${Math.min(outfitItems.length, 4)}, 1fr)` }}>
+              {outfitItems.map((item: any) => (
+                <div key={item.id} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #f0f0f0' }}>
+                  <div style={{ height: 140, background: '#f8f8f8' }}>
+                    {item.image_base64
+                      ? <img src={item.image_base64} alt={item.category}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      : <div style={{ height: '100%', display: 'flex', alignItems: 'center',
+                          justifyContent: 'center', fontSize: 28 }}>👕</div>
+                    }
+                  </div>
+                  <div style={{ padding: '8px 10px' }}>
+                    <p style={{ color: '#000', fontSize: 12, fontWeight: 700,
+                      margin: '0 0 1px', textTransform: 'capitalize' }}>{item.category}</p>
+                    <p style={{ color: '#bbb', fontSize: 11, margin: 0 }}>{item.primary_color}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          {/* Styling tip */}
-          <div style={{
-            background: '#1a1f2e', borderRadius: 10,
-            padding: 16, border: '1px solid #6c63ff44',
-            marginBottom: 16
-          }}>
-            <p style={{ color: '#aaa', fontSize: 11, fontWeight: 700,
-              letterSpacing: 1.5, margin: '0 0 6px' }}>
-              STYLING TIP
-            </p>
-            <p style={{ color: '#c4b5fd', margin: 0, lineHeight: 1.6 }}>
-              {outfit.tip}
-            </p>
+            {/* Why + tip */}
+            <div style={{ padding: '0 20px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ background: '#fafafa', borderRadius: 12, padding: '14px 16px' }}>
+                <p style={{ color: '#bbb', fontSize: 10, fontWeight: 700,
+                  letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 6px' }}>Why this works</p>
+                <p style={{ color: '#333', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.reason}</p>
+              </div>
+              <div style={{ background: '#f5f3ff', borderRadius: 12, padding: '14px 16px',
+                border: '1px solid #e0d9ff' }}>
+                <p style={{ color: '#a78bfa', fontSize: 10, fontWeight: 700,
+                  letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 6px' }}>Styling tip</p>
+                <p style={{ color: '#6c63ff', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.tip}</p>
+              </div>
+              <button onClick={generate} style={{ width: '100%', padding: 12,
+                background: '#fff', color: '#6c63ff', border: '1px solid #e0d9ff',
+                borderRadius: 10, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
+                Generate another outfit →
+              </button>
+            </div>
           </div>
-
-          {/* Regenerate */}
-          <button onClick={generateOutfit} style={{
-            width: '100%', padding: 12,
-            background: 'transparent', color: '#6c63ff',
-            border: '1px solid #6c63ff', borderRadius: 8,
-            cursor: 'pointer', fontSize: 14, fontWeight: 600
-          }}>
-            Generate Another Outfit
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

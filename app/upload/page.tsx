@@ -1,207 +1,206 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
+import Navbar from '../components/Navbar'
+
+function compressImage(file: File): Promise<string> {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')!
+    const img = new Image()
+    img.onload = () => {
+      const MAX = 300
+      let w = img.width, h = img.height
+      if (w > h && w > MAX) { h = (h * MAX) / w; w = MAX }
+      else if (h > MAX) { w = (w * MAX) / h; h = MAX }
+      canvas.width = w; canvas.height = h
+      ctx.drawImage(img, 0, 0, w, h)
+      resolve(canvas.toDataURL('image/jpeg', 0.7))
+    }
+    img.src = URL.createObjectURL(file)
+  })
+}
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
-  const [base64, setBase64] = useState<string | null>(null)
   const [status, setStatus] = useState('')
+  const [progress, setProgress] = useState(0)
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
+  const [dragging, setDragging] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  function handleFile(selected: File) {
+    setFile(selected); setPreview(URL.createObjectURL(selected))
+    setResult(null); setStatus(''); setProgress(0)
+  }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const selected = e.target.files?.[0]
-    if (!selected) return
-    setFile(selected)
-    setResult(null)
-    setStatus('')
+    const f = e.target.files?.[0]; if (f) handleFile(f)
+  }
 
-    const reader = new FileReader()
-    reader.onload = () => {
-      const full = reader.result as string
-      setPreview(full)
-      setBase64(full.split(',')[1])
-    }
-    reader.readAsDataURL(selected)
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault(); setDragging(false)
+    const f = e.dataTransfer.files?.[0]
+    if (f && f.type.startsWith('image/')) handleFile(f)
   }
 
   async function handleUpload() {
-    if (!file || !base64) return
+    if (!file) return
     setLoading(true)
-
     try {
-      // Step 1 — Analyze with Ollama
-      setStatus('AI is analyzing your item...')
-      const analyzeRes = await fetch('/api/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageBase64: base64 })
-      })
+      setStatus('Preparing image...'); setProgress(20)
+      const compressed = await compressImage(file)
+      const base64Only = compressed.split(',')[1]
 
-      const analysis = await analyzeRes.json()
+      setStatus('AI is analyzing your item...'); setProgress(50)
+      const res = await fetch('/api/analyze', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: base64Only })
+      })
+      const analysis = await res.json()
       if (analysis.error) throw new Error(analysis.error)
 
-      // Step 2 — Save to Supabase (no storage, just base64)
-      setStatus('Saving to wardrobe...')
-      const { error: dbError } = await supabase
-        .from('wardrobe_items')
-        .insert({
-          image_base64: preview,
-          category: analysis.category,
-          primary_color: analysis.primary_color,
-          style_tags: analysis.style_tags,
-          occasion: analysis.occasion,
-          description: analysis.description
-        })
+      setStatus('Saving to wardrobe...'); setProgress(85)
+      const { error } = await supabase.from('wardrobe_items').insert({
+        image_base64: compressed, category: analysis.category,
+        primary_color: analysis.primary_color, style_tags: analysis.style_tags,
+        occasion: analysis.occasion, description: analysis.description
+      })
+      if (error) throw error
 
-      if (dbError) throw dbError
-
-      setResult(analysis)
-      setStatus('Done!')
-
+      setProgress(100); setResult(analysis); setStatus('Done!')
     } catch (err: any) {
-      setStatus('❌ Error: ' + err.message)
+      setStatus('Error: ' + err.message); setProgress(0)
     }
-
     setLoading(false)
   }
 
   return (
-    <div style={{
-      maxWidth: 500,
-      margin: '40px auto',
-      padding: '0 20px',
-      fontFamily: 'sans-serif'
-    }}>
-      <h1 style={{ fontSize: 24, fontWeight: 600, marginBottom: 8 }}>
-        Add to Wardrobe
-      </h1>
-      <p style={{ color: '#888', marginBottom: 24 }}>
-        Upload a clothing item and AI will analyze it
-      </p>
+    <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'system-ui, sans-serif' }}>
+      <Navbar />
+      <div style={{ maxWidth: 520, margin: '48px auto', padding: '0 24px' }}>
 
-      {/* Upload box */}
-      <label style={{
-        display: 'block',
-        border: '2px dashed #444',
-        borderRadius: 12,
-        padding: 32,
-        textAlign: 'center',
-        cursor: 'pointer',
-        marginBottom: 16,
-        background: '#111'
-      }}>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
-        {preview
-          ? <img
-              src={preview}
-              alt="preview"
-              style={{
-                maxHeight: 240,
-                borderRadius: 8,
-                objectFit: 'contain',
-                maxWidth: '100%'
-              }}
-            />
-          : <p style={{ color: '#666' }}>Click to choose a photo</p>
-        }
-      </label>
+        <div style={{ marginBottom: 32 }}>
+          <h1 style={{ fontSize: 28, fontWeight: 900, color: '#000',
+            margin: '0 0 6px', letterSpacing: '-1px' }}>Add to wardrobe</h1>
+          <p style={{ color: '#888', margin: 0, fontSize: 15 }}>
+            Drop a photo — AI tags it automatically
+          </p>
+        </div>
 
-      {/* Analyze button */}
-      {file && !loading && !result && (
-        <button
-          onClick={handleUpload}
+        {/* Drop zone */}
+        <div
+          onClick={() => inputRef.current?.click()}
+          onDragOver={e => { e.preventDefault(); setDragging(true) }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={handleDrop}
           style={{
-            width: '100%',
-            padding: 14,
-            background: '#fff',
-            color: '#000',
-            border: 'none',
-            borderRadius: 10,
-            fontSize: 16,
-            cursor: 'pointer',
-            fontWeight: 600
+            border: `2px dashed ${dragging ? '#6c63ff' : '#e8e8e8'}`,
+            borderRadius: 16, overflow: 'hidden',
+            background: dragging ? '#f5f3ff' : preview ? '#000' : '#fafafa',
+            cursor: 'pointer', transition: 'all 0.2s', marginBottom: 16,
+            padding: preview ? 0 : 52, textAlign: 'center'
           }}
         >
-          Analyze with AI
-        </button>
-      )}
-
-      {/* Status */}
-      {loading && (
-        <p style={{
-          textAlign: 'center',
-          color: '#aaa',
-          padding: 16
-        }}>
-          ⏳ {status}
-        </p>
-      )}
-
-      {/* Error */}
-      {!loading && status.startsWith('❌') && (
-        <p style={{ color: 'red', textAlign: 'center' }}>{status}</p>
-      )}
-
-      {/* Result */}
-      {result && (
-        <div style={{
-          marginTop: 24,
-          background: '#1a1a1a',
-          borderRadius: 12,
-          padding: 20,
-          border: '1px solid #333'
-        }}>
-          <h2 style={{ fontSize: 18, marginBottom: 16, color: '#fff' }}>
-            ✅ Item Added to Wardrobe!
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <p style={{ color: '#ccc' }}>
-              <b style={{ color: '#fff' }}>Category:</b> {result.category}
-            </p>
-            <p style={{ color: '#ccc' }}>
-              <b style={{ color: '#fff' }}>Color:</b> {result.primary_color}
-            </p>
-            <p style={{ color: '#ccc' }}>
-              <b style={{ color: '#fff' }}>Style:</b> {result.style_tags?.join(', ')}
-            </p>
-            <p style={{ color: '#ccc' }}>
-              <b style={{ color: '#fff' }}>Occasion:</b> {result.occasion?.join(', ')}
-            </p>
-            <p style={{ color: '#ccc' }}>
-              <b style={{ color: '#fff' }}>Description:</b> {result.description}
-            </p>
-          </div>
-          <button
-            onClick={() => {
-              setFile(null)
-              setPreview(null)
-              setBase64(null)
-              setResult(null)
-              setStatus('')
-            }}
-            style={{
-              marginTop: 16,
-              width: '100%',
-              padding: 12,
-              background: '#fff',
-              color: '#000',
-              border: 'none',
-              borderRadius: 8,
-              cursor: 'pointer',
-              fontWeight: 600
-            }}
-          >
-            Add Another Item
-          </button>
+          <input ref={inputRef} type="file" accept="image/*"
+            onChange={handleFileChange} style={{ display: 'none' }} />
+          {preview ? (
+            <img src={preview} alt="preview" style={{
+              width: '100%', maxHeight: 300, objectFit: 'cover', display: 'block'
+            }} />
+          ) : (
+            <>
+              <div style={{ fontSize: 36, marginBottom: 10 }}>🪞</div>
+              <p style={{ color: '#333', fontWeight: 700, margin: '0 0 4px', fontSize: 15 }}>
+                Drop your clothing photo here
+              </p>
+              <p style={{ color: '#bbb', fontSize: 13, margin: 0 }}>
+                Click to browse · JPG or PNG
+              </p>
+            </>
+          )}
         </div>
-      )}
+
+        {/* Progress */}
+        {loading && (
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+              <span style={{ fontSize: 13, color: '#666' }}>{status}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: '#6c63ff' }}>{progress}%</span>
+            </div>
+            <div style={{ height: 5, background: '#f0f0f0', borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{
+                width: `${progress}%`, height: '100%',
+                background: 'linear-gradient(90deg, #6c63ff, #00b894)',
+                borderRadius: 5, transition: 'width 0.4s ease'
+              }} />
+            </div>
+          </div>
+        )}
+
+        {/* Button */}
+        {file && !loading && !result && (
+          <button onClick={handleUpload} style={{
+            width: '100%', padding: 15, background: '#000', color: '#fff',
+            border: 'none', borderRadius: 12, fontSize: 16,
+            cursor: 'pointer', fontWeight: 800, letterSpacing: '-0.3px'
+          }}>
+            Analyze with AI →
+          </button>
+        )}
+
+        {!loading && status.startsWith('Error') && (
+          <p style={{ color: '#e53e3e', fontSize: 14, textAlign: 'center' }}>{status}</p>
+        )}
+
+        {/* Result */}
+        {result && (
+          <div style={{ marginTop: 20, border: '1px solid #f0f0f0', borderRadius: 16, overflow: 'hidden' }}>
+            <div style={{ padding: '20px 20px 0', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+              <div style={{ width: 32, height: 32, background: '#f0fdf4', borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✅</div>
+              <p style={{ fontWeight: 800, color: '#000', margin: 0, fontSize: 16 }}>Added to wardrobe!</p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px', marginBottom: 12 }}>
+              {[
+                { l: 'Category', v: result.category },
+                { l: 'Color', v: result.primary_color },
+                { l: 'Style', v: result.style_tags?.join(', ') },
+                { l: 'Occasion', v: result.occasion?.join(', ') },
+              ].map(i => (
+                <div key={i.l} style={{ background: '#fafafa', borderRadius: 10, padding: '10px 12px' }}>
+                  <p style={{ color: '#bbb', fontSize: 10, fontWeight: 700,
+                    letterSpacing: 1.2, textTransform: 'uppercase', margin: '0 0 2px' }}>{i.l}</p>
+                  <p style={{ color: '#000', fontSize: 13, fontWeight: 700,
+                    margin: 0, textTransform: 'capitalize' }}>{i.v}</p>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ color: '#777', fontSize: 13, margin: '0 20px 20px',
+              background: '#fafafa', padding: '10px 12px', borderRadius: 10 }}>
+              {result.description}
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px 20px' }}>
+              <button
+                onClick={() => { setFile(null); setPreview(null); setResult(null); setStatus(''); setProgress(0) }}
+                style={{ padding: 12, background: '#000', color: '#fff', border: 'none',
+                  borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
+                Add another
+              </button>
+              <a href="/wardrobe" style={{ padding: 12, background: '#f5f3ff', color: '#6c63ff',
+                border: '1px solid #e0d9ff', borderRadius: 10, cursor: 'pointer',
+                fontWeight: 700, fontSize: 14, textDecoration: 'none', textAlign: 'center' }}>
+                View wardrobe →
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

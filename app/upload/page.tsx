@@ -112,7 +112,7 @@ export default function UploadPage() {
             }} />
           ) : (
             <>
-              <div style={{ fontSize: 36, marginBottom: 10 }}>🪞</div>
+              <div style={{ fontSize: 36, marginBottom: 10 }}>🧩</div>
               <p style={{ color: '#333', fontWeight: 700, margin: '0 0 4px', fontSize: 15 }}>
                 Drop your clothing photo here
               </p>

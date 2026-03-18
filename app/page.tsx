@@ -3,151 +3,159 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#0a0a0a' }}>
+    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#fff' }}>
 
       {/* Navbar */}
       <nav style={{
-        display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', padding: '20px 40px',
-        borderBottom: '1px solid #1a1a1a', background: '#0a0a0a',
-        position: 'sticky', top: 0, zIndex: 100
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '16px 32px', borderBottom: '1px solid #f0f0f0',
+        background: '#fff', position: 'sticky', top: 0, zIndex: 100
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 24 }}>👗</span>
-          <span style={{ color: '#fff', fontWeight: 700, fontSize: 18 }}>WardrobeAI</span>
+          <div style={{
+            width: 32, height: 32, background: '#000', borderRadius: 8,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16
+          }}>🪞</div>
+          <span style={{ fontWeight: 800, fontSize: 18, color: '#000', letterSpacing: '-0.5px' }}>
+            Drip<span style={{ color: '#6c63ff' }}>AI</span>
+          </span>
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <Link href="/wardrobe" style={{
-            color: '#888', textDecoration: 'none', fontSize: 14,
-            padding: '8px 16px', borderRadius: 8,
-            transition: 'color 0.2s'
-          }}>
-            My Wardrobe
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <Link href="/wardrobe" style={{ color: '#555', textDecoration: 'none', fontSize: 14, padding: '8px 16px' }}>
+            Wardrobe
           </Link>
-          <Link href="/upload" style={{
-            color: '#888', textDecoration: 'none', fontSize: 14,
-            padding: '8px 16px', borderRadius: 8
-          }}>
+          <Link href="/upload" style={{ color: '#555', textDecoration: 'none', fontSize: 14, padding: '8px 16px' }}>
             Upload
           </Link>
           <Link href="/outfit" style={{
-            padding: '8px 20px', background: '#6c63ff',
-            color: '#fff', borderRadius: 8,
-            textDecoration: 'none', fontSize: 14, fontWeight: 600
+            padding: '9px 20px', background: '#000', color: '#fff',
+            borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 700
           }}>
-            Generate Outfit
+            Get Outfit ✨
           </Link>
         </div>
       </nav>
 
       {/* Hero */}
-      <div style={{
-        textAlign: 'center', padding: '100px 20px 60px',
-        maxWidth: 700, margin: '0 auto'
-      }}>
+      <div style={{ maxWidth: 760, margin: '0 auto', padding: '90px 20px 60px', textAlign: 'center' }}>
         <div style={{
-          display: 'inline-block', padding: '6px 16px',
-          background: '#1a1a2e', border: '1px solid #6c63ff44',
-          borderRadius: 20, color: '#c4b5fd', fontSize: 13,
-          marginBottom: 24
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          padding: '6px 14px', background: '#f5f3ff',
+          border: '1px solid #e0d9ff', borderRadius: 20,
+          color: '#6c63ff', fontSize: 13, fontWeight: 600, marginBottom: 28
         }}>
-          ✨ AI-Powered Personal Stylist
+          <span style={{ fontSize: 14 }}>✨</span> AI-Powered Personal Stylist
         </div>
 
         <h1 style={{
-          fontSize: 56, fontWeight: 800, color: '#fff',
-          margin: '0 0 20px', lineHeight: 1.1
+          fontSize: 60, fontWeight: 900, color: '#000',
+          margin: '0 0 20px', lineHeight: 1.05, letterSpacing: '-2px'
         }}>
-          Your wardrobe,{' '}
-          <span style={{
-            background: 'linear-gradient(135deg, #6c63ff, #00b894)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            reinvented
-          </span>
+          Your wardrobe.<br />
+          <span style={{ color: '#6c63ff' }}>Reinvented.</span>
         </h1>
 
         <p style={{
-          color: '#888', fontSize: 18, lineHeight: 1.7,
-          margin: '0 0 40px'
+          color: '#666', fontSize: 18, lineHeight: 1.7,
+          margin: '0 0 40px', maxWidth: 520, marginLeft: 'auto', marginRight: 'auto'
         }}>
-          Upload your clothes, let AI analyze them, and get perfect outfit suggestions
-          tailored to your style, occasion, and weather every day.
+          Upload your clothes, let AI analyze every item, and get
+          perfect outfit combinations for any occasion — every day.
         </p>
 
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/upload" style={{
-            padding: '16px 36px', background: '#6c63ff',
-            color: '#fff', borderRadius: 12, textDecoration: 'none',
-            fontSize: 16, fontWeight: 700
+            padding: '15px 32px', background: '#000', color: '#fff',
+            borderRadius: 12, textDecoration: 'none', fontSize: 16, fontWeight: 700,
+            letterSpacing: '-0.3px'
           }}>
-            Start Building Wardrobe →
+            Build my wardrobe →
           </Link>
           <Link href="/outfit" style={{
-            padding: '16px 36px', background: '#1a1a1a',
-            color: '#fff', borderRadius: 12, textDecoration: 'none',
-            fontSize: 16, fontWeight: 600, border: '1px solid #333'
+            padding: '15px 32px', background: '#f5f3ff', color: '#6c63ff',
+            borderRadius: 12, textDecoration: 'none', fontSize: 16, fontWeight: 600,
+            border: '1px solid #e0d9ff'
           }}>
-            Generate Outfit ✨
+            Generate outfit ✨
           </Link>
         </div>
       </div>
 
-      {/* Features */}
+      {/* Stats row */}
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: 20, maxWidth: 900, margin: '0 auto', padding: '40px 20px 80px'
+        display: 'flex', justifyContent: 'center', gap: 48,
+        padding: '32px 20px', borderTop: '1px solid #f0f0f0',
+        borderBottom: '1px solid #f0f0f0', background: '#fafafa'
       }}>
         {[
-          { icon: '📸', title: 'Upload Anything', desc: 'Shirts, pants, shoes, accessories — add your entire closet in minutes' },
-          { icon: '🤖', title: 'AI Analysis', desc: 'Local AI analyzes color, style and occasion for every item automatically' },
-          { icon: '✨', title: 'Outfit Generator', desc: 'Get complete outfit suggestions based on occasion, weather and fashion style' },
-          { icon: '🎨', title: 'Your Style', desc: 'Choose from casual, streetwear, formal, preppy and more fashion styles' },
-        ].map((f) => (
-          <div key={f.title} style={{
-            background: '#111', borderRadius: 16,
-            padding: 24, border: '1px solid #1e1e1e'
-          }}>
-            <div style={{ fontSize: 32, marginBottom: 12 }}>{f.icon}</div>
-            <h3 style={{ color: '#fff', margin: '0 0 8px', fontSize: 17, fontWeight: 600 }}>
-              {f.title}
-            </h3>
-            <p style={{ color: '#666', margin: 0, lineHeight: 1.6, fontSize: 14 }}>
-              {f.desc}
+          { number: '100%', label: 'Free forever' },
+          { number: 'AI', label: 'Vision analysis' },
+          { number: '∞', label: 'Outfit combos' },
+          { number: '0s', label: 'Setup required' },
+        ].map(stat => (
+          <div key={stat.label} style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: 24, fontWeight: 900, color: '#000', margin: '0 0 2px', letterSpacing: '-1px' }}>
+              {stat.number}
             </p>
+            <p style={{ fontSize: 13, color: '#aaa', margin: 0 }}>{stat.label}</p>
           </div>
         ))}
       </div>
 
-      {/* CTA Banner */}
-      <div style={{
-        maxWidth: 700, margin: '0 auto 80px',
-        background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
-        borderRadius: 20, padding: '48px 40px',
-        textAlign: 'center', border: '1px solid #6c63ff33'
-      }}>
-        <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 700, margin: '0 0 12px' }}>
-          Ready to dress better every day?
+      {/* Features */}
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '64px 20px' }}>
+        <h2 style={{ fontSize: 32, fontWeight: 800, color: '#000',
+          textAlign: 'center', margin: '0 0 48px', letterSpacing: '-1px' }}>
+          Everything your wardrobe needs
         </h2>
-        <p style={{ color: '#888', margin: '0 0 28px', fontSize: 16 }}>
-          Add your first clothing item and let AI do the rest
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+          {[
+            { icon: '📸', title: 'Upload anything', desc: 'Shirts, pants, shoes, accessories — add your full closet in minutes with AI tagging' },
+            { icon: '🤖', title: 'AI vision analysis', desc: 'Automatically detects color, style, category and occasion for every item' },
+            { icon: '✨', title: 'Smart outfits', desc: 'Complete outfit combinations based on occasion, weather and your fashion style' },
+            { icon: '🎯', title: 'Styled for you', desc: 'Choose casual, streetwear, formal, preppy — AI matches your preferred aesthetic' },
+          ].map(f => (
+            <div key={f.title} style={{
+              background: '#fff', borderRadius: 16, padding: 24,
+              border: '1px solid #f0f0f0', transition: 'border-color 0.2s'
+            }}>
+              <div style={{ fontSize: 28, marginBottom: 12 }}>{f.icon}</div>
+              <h3 style={{ color: '#000', margin: '0 0 8px', fontSize: 16, fontWeight: 700, letterSpacing: '-0.3px' }}>
+                {f.title}
+              </h3>
+              <p style={{ color: '#888', margin: 0, lineHeight: 1.6, fontSize: 14 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div style={{
+        maxWidth: 600, margin: '0 auto 80px',
+        background: '#000', borderRadius: 20,
+        padding: '48px 40px', textAlign: 'center'
+      }}>
+        <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 800, margin: '0 0 10px', letterSpacing: '-0.5px' }}>
+          Start dressing better today
+        </h2>
+        <p style={{ color: '#888', margin: '0 0 28px', fontSize: 15 }}>
+          Add your first item and let AI do the rest
         </p>
         <Link href="/upload" style={{
           padding: '14px 32px', background: '#6c63ff',
           color: '#fff', borderRadius: 10, textDecoration: 'none',
           fontSize: 16, fontWeight: 700
         }}>
-          Upload First Item →
+          Upload first item →
         </Link>
       </div>
 
       {/* Footer */}
       <div style={{
         textAlign: 'center', padding: '24px',
-        borderTop: '1px solid #1a1a1a', color: '#444', fontSize: 13
+        borderTop: '1px solid #f0f0f0', color: '#ccc', fontSize: 13
       }}>
-        WardrobeAI — Built with Next.js + Ollama + Supabase
+        DripAI — Built with Next.js + Groq + Supabase
       </div>
     </div>
   )

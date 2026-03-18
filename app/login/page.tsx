@@ -39,10 +39,10 @@ export default function LoginPage() {
 
       {/* Left panel */}
       <div style={{
-        flex: 1, background: '#000',
-        display: 'flex', flexDirection: 'column',
-        justifyContent: 'space-between', padding: '48px'
-      }}>
+  flex: 1, background: '#000',
+  display: 'flex', flexDirection: 'column',
+  justifyContent: 'center', gap: '48px', padding: '48px'
+}}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
             width: 36, height: 36, background: '#fff', borderRadius: 10,
@@ -59,8 +59,8 @@ export default function LoginPage() {
             What people are saying
           </p>
           <p style={{
-            color: '#fff', fontSize: 20, lineHeight: 1.6,
-            fontWeight: 500, margin: '0 0 20px', letterSpacing: '-0.3px'
+            color: '#fff', fontSize: 26, lineHeight: 1.5,
+            fontWeight: 800, margin: '0 0 20px', letterSpacing: '-0.5px'
           }}>
             "DripAI completely changed how I get dressed. It picks better outfits than I ever could."
           </p>

@@ -12,7 +12,7 @@ export default function Navbar() {
         <div style={{
           width: 30, height: 30, background: '#000', borderRadius: 8,
           display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15
-        }}>🪞</div>
+        }}>💧</div>
         <span style={{ fontWeight: 800, fontSize: 17, color: '#000', letterSpacing: '-0.5px' }}>
           Drip<span style={{ color: '#6c63ff' }}>AI</span>
         </span>
@@ -33,7 +33,7 @@ export default function Navbar() {
           textDecoration: 'none', fontSize: 14, borderRadius: 8,
           fontWeight: 700, letterSpacing: '-0.2px', marginLeft: 4
         }}>
-          Get Outfit ✨
+          Get Outfit
         </Link>
       </div>
     </nav>

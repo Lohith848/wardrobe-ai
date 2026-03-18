@@ -3,6 +3,43 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Navbar from '../components/Navbar'
 import Link from 'next/link'
+function SaveButton({ outfit, occasion, weather, style }: any) {
+  const [saved, setSaved] = useState(false)
+  const [saving, setSaving] = useState(false)
+
+  async function saveOutfit() {
+    setSaving(true)
+    const { error } = await supabase
+      .from('saved_outfits')
+      .insert({
+        title: outfit.title,
+        reason: outfit.reason,
+        tip: outfit.tip,
+        occasion,
+        weather,
+        style
+      })
+    if (!error) setSaved(true)
+    setSaving(false)
+  }
+
+  return (
+    <button
+      onClick={saveOutfit}
+      disabled={saved || saving}
+      style={{
+        width: '100%', padding: 12, marginBottom: 10,
+        background: saved ? '#f0fdf4' : '#fff',
+        color: saved ? '#059669' : '#000',
+        border: `1px solid ${saved ? '#bbf7d0' : '#e0e0e0'}`,
+        borderRadius: 8, cursor: saved ? 'default' : 'pointer',
+        fontSize: 14, fontWeight: 600
+      }}
+    >
+      {saving ? 'Saving...' : saved ? 'Saved to collection' : 'Save this outfit'}
+    </button>
+  )
+}
 
 const OCCASIONS = ['everyday casual','college','office','party','gym','date night','outdoor','festival']
 const WEATHERS = ['sunny & breezy','hot & humid','cold','rainy','winter']
@@ -174,6 +211,11 @@ export default function OutfitPage() {
                   letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 6px' }}>Styling tip</p>
                 <p style={{ color: '#6c63ff', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.tip}</p>
               </div>
+               {/* Save button */}
+                {outfit && (
+                 <SaveButton outfit={outfit} occasion={occasion} weather={weather} style={style} />
+                 )}
+
               <button onClick={generate} style={{ width: '100%', padding: 12,
                 background: '#fff', color: '#6c63ff', border: '1px solid #e0d9ff',
                 borderRadius: 10, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>

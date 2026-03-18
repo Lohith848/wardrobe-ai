@@ -1,0 +1,18 @@
+{
+    "name": "DripAI - AI Personal Stylist",
+    "short_name": "DripAI",
+    "description": "Upload your wardrobe and get AI outfit suggestions",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "/favicon.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any maskable"
+      }
+    ]
+  }

@@ -26,90 +26,225 @@ export default function SavedPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#050505', fontFamily: 'system-ui, sans-serif' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#f3f4f6',
+        fontFamily: 'system-ui, sans-serif',
+      }}
+    >
       <Navbar />
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '40px 24px' }}>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+      <div style={{ maxWidth: 880, margin: '0 auto', padding: '32px 16px 40px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            gap: 12,
+            marginBottom: 20,
+            flexWrap: 'wrap',
+          }}
+        >
           <div>
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#ffffff',
-              margin: '0 0 4px', letterSpacing: '-0.8px' }}>
+            <h1
+              style={{
+                fontSize: 22,
+                fontWeight: 600,
+                color: '#111827',
+                margin: '0 0 4px',
+              }}
+            >
               Saved outfits
             </h1>
-            <p style={{ color: '#71717a', margin: 0, fontSize: 14 }}>
+            <p style={{ color: '#6b7280', margin: 0, fontSize: 13 }}>
               {outfits.length} outfits saved
             </p>
           </div>
-          <Link href="/outfit" style={{
-            padding: '10px 20px', background: '#ffffff', color: '#050505',
-            borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 600
-          }}>
+          <Link
+            href="/outfit"
+            style={{
+              padding: '9px 16px',
+              background: '#111827',
+              color: '#ffffff',
+              borderRadius: 999,
+              textDecoration: 'none',
+              fontSize: 13,
+              fontWeight: 500,
+            }}
+          >
             Create new outfit
           </Link>
         </div>
 
         {loading && (
-          <p style={{ textAlign: 'center', color: '#71717a', padding: 60 }}>Loading...</p>
+          <p
+            style={{
+              textAlign: 'center',
+              color: '#6b7280',
+              padding: 40,
+              fontSize: 13,
+            }}
+          >
+            Loading…
+          </p>
         )}
 
         {!loading && outfits.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '80px 0' }}>
-            <p style={{ fontSize: 48, margin: '0 0 12px' }}>🗂</p>
-            <p style={{ color: '#71717a', fontSize: 16, margin: '0 0 20px' }}>No saved outfits yet</p>
-            <Link href="/outfit" style={{
-              padding: '12px 24px', background: '#ffffff', color: '#050505',
-              borderRadius: 10, textDecoration: 'none', fontWeight: 600
-            }}>
+          <div style={{ textAlign: 'center', padding: '40px 0' }}>
+            <p
+              style={{
+                color: '#6b7280',
+                fontSize: 14,
+                margin: '0 0 16px',
+              }}
+            >
+              You don’t have any saved outfits yet.
+            </p>
+            <Link
+              href="/outfit"
+              style={{
+                padding: '9px 18px',
+                background: '#111827',
+                color: '#ffffff',
+                borderRadius: 999,
+                textDecoration: 'none',
+                fontWeight: 500,
+                fontSize: 13,
+              }}
+            >
               Generate your first outfit
             </Link>
           </div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gap: 12,
+          }}
+        >
           {outfits.map(outfit => (
-            <div key={outfit.id} style={{
-              background: '#050505', borderRadius: 16, padding: 20,
-              border: '1px solid #f0f0f0'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-                <h3 style={{ fontSize: 16, fontWeight: 800, color: '#ffffff',
-                  margin: 0, letterSpacing: '-0.3px' }}>
+            <div
+              key={outfit.id}
+              style={{
+                background: '#ffffff',
+                borderRadius: 12,
+                padding: 14,
+                border: '1px solid #e5e7eb',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: 8,
+                  gap: 8,
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: '#111827',
+                    margin: 0,
+                  }}
+                >
                   {outfit.title}
                 </h3>
-                <button onClick={() => deleteOutfit(outfit.id)} style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#52525b', fontSize: 16, padding: 0
-                }}>✕</button>
+                <button
+                  onClick={() => deleteOutfit(outfit.id)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#6b7280',
+                    fontSize: 14,
+                    padding: 0,
+                  }}
+                >
+                  ×
+                </button>
               </div>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
-                {[outfit.occasion, outfit.weather, outfit.style].filter(Boolean).map((tag: string) => (
-                  <span key={tag} style={{
-                    padding: '3px 10px', background: 'rgba(139, 92, 246, 0.1)',
-                    color: '#818cf8', borderRadius: 20, fontSize: 12,
-                    fontWeight: 500, textTransform: 'capitalize'
-                  }}>
-                    {tag}
-                  </span>
-                ))}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 6,
+                  flexWrap: 'wrap',
+                  marginBottom: 8,
+                }}
+              >
+                {[outfit.occasion, outfit.weather, outfit.style]
+                  .filter(Boolean)
+                  .map((tag: string) => (
+                    <span
+                      key={tag}
+                      style={{
+                        padding: '2px 8px',
+                        background: '#f3f4f6',
+                        color: '#4b5563',
+                        borderRadius: 999,
+                        fontSize: 11,
+                        fontWeight: 500,
+                        textTransform: 'capitalize',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
               </div>
-              <p style={{ color: '#a1a1aa', fontSize: 13, lineHeight: 1.6, margin: '0 0 10px' }}>
+              <p
+                style={{
+                  color: '#4b5563',
+                  fontSize: 12,
+                  lineHeight: 1.5,
+                  margin: '0 0 8px',
+                }}
+              >
                 {outfit.reason}
               </p>
-              <div style={{
-                background: '#111111', borderRadius: 8, padding: 12,
-                border: '1px solid #f0f0f0'
-              }}>
-                <p style={{ color: '#71717a', fontSize: 11, fontWeight: 700,
-                  letterSpacing: 1, textTransform: 'uppercase', margin: '0 0 4px' }}>
+              <div
+                style={{
+                  background: '#f9fafb',
+                  borderRadius: 8,
+                  padding: 10,
+                  border: '1px solid #e5e7eb',
+                }}
+              >
+                <p
+                  style={{
+                    color: '#9ca3af',
+                    fontSize: 10,
+                    fontWeight: 500,
+                    letterSpacing: 0.5,
+                    textTransform: 'uppercase',
+                    margin: '0 0 3px',
+                  }}
+                >
                   Tip
                 </p>
-                <p style={{ color: '#a1a1aa', fontSize: 13, margin: 0, lineHeight: 1.5 }}>
+                <p
+                  style={{
+                    color: '#4b5563',
+                    fontSize: 12,
+                    margin: 0,
+                    lineHeight: 1.4,
+                  }}
+                >
                   {outfit.tip}
                 </p>
               </div>
-              <p style={{ color: '#52525b', fontSize: 12, margin: '10px 0 0' }}>
+              <p
+                style={{
+                  color: '#9ca3af',
+                  fontSize: 11,
+                  margin: '8px 0 0',
+                }}
+              >
                 {new Date(outfit.created_at).toLocaleDateString('en-IN', {
-                  day: 'numeric', month: 'short', year: 'numeric'
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
                 })}
               </p>
             </div>

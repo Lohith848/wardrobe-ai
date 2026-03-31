@@ -78,138 +78,299 @@ export default function UploadPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#050505', fontFamily: 'system-ui, sans-serif' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#f3f4f6',
+        fontFamily: 'system-ui, sans-serif',
+      }}
+    >
       <Navbar />
-      <div style={{ maxWidth: 520, margin: '48px auto', padding: '0 24px' }}>
-
-        <div style={{ marginBottom: 32 }}>
-          <h1 style={{
-            fontSize: 28, fontWeight: 900, color: '#ffffff',
-            margin: '0 0 6px', letterSpacing: '-1px'
-          }}>Add to wardrobe</h1>
-          <p style={{ color: '#71717a', margin: 0, fontSize: 15 }}>
-            Drop a photo — AI tags it automatically
+      <div style={{ maxWidth: 520, margin: '32px auto 40px', padding: '0 16px' }}>
+        <div style={{ marginBottom: 20 }}>
+          <h1
+            style={{
+              fontSize: 22,
+              fontWeight: 600,
+              color: '#111827',
+              margin: '0 0 4px',
+            }}
+          >
+            Add an item to your wardrobe
+          </h1>
+          <p style={{ color: '#6b7280', margin: 0, fontSize: 13 }}>
+            Choose a clear photo of a single clothing item. AI will tag it for you.
           </p>
         </div>
 
         {/* Drop zone */}
         <div
           onClick={() => inputRef.current?.click()}
-          onDragOver={e => { e.preventDefault(); setDragging(true) }}
+          onDragOver={e => {
+            e.preventDefault()
+            setDragging(true)
+          }}
           onDragLeave={() => setDragging(false)}
           onDrop={handleDrop}
           style={{
-            border: `2px dashed ${dragging ? '#a78bfa' : '#e8e8e8'}`,
-            borderRadius: 16, overflow: 'hidden',
-            background: dragging ? 'rgba(139, 92, 246, 0.1)' : preview ? '#ffffff' : '#111111',
-            cursor: 'pointer', transition: 'all 0.2s', marginBottom: 16,
-            padding: preview ? 0 : 52, textAlign: 'center'
+            border: `1px dashed ${dragging ? '#4b5563' : '#d1d5db'}`,
+            borderRadius: 12,
+            background: '#ffffff',
+            cursor: 'pointer',
+            transition: 'border-color 0.15s ease, background-color 0.15s ease',
+            marginBottom: 12,
+            padding: 12,
           }}
         >
-          <input ref={inputRef} type="file" accept="image/*"
-            onChange={handleFileChange} style={{ display: 'none' }} />
-          {preview ? (
-            <img src={preview} alt="preview" style={{
-              width: '100%', maxHeight: 300, objectFit: 'cover', display: 'block'
-            }} />
-          ) : (
-            <>
-              <div style={{ fontSize: 36, marginBottom: 10 }}>🧩</div>
-              <p style={{ color: '#e5e7eb', fontWeight: 700, margin: '0 0 4px', fontSize: 15 }}>
-                Drop your clothing photo here
-              </p>
-              <p style={{ color: '#52525b', fontSize: 13, margin: 0 }}>
-                Click to browse · JPG or PNG
-              </p>
-            </>
-          )}
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+
+          <div
+            style={{
+              borderRadius: 10,
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              height: 220,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+            }}
+          >
+            {preview ? (
+              <img
+                src={preview}
+                alt="preview"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <p
+                  style={{
+                    margin: '0 0 4px',
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: '#111827',
+                  }}
+                >
+                  Drop a clothing photo here
+                </p>
+                <p style={{ color: '#6b7280', fontSize: 12, margin: 0 }}>
+                  Or tap to browse · JPG or PNG
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Progress */}
         {loading && (
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-              <span style={{ fontSize: 13, color: '#a1a1aa' }}>{status}</span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: '#a78bfa' }}>{progress}%</span>
+          <div style={{ marginBottom: 12 }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: 4,
+              }}
+            >
+              <span style={{ fontSize: 12, color: '#6b7280' }}>{status}</span>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 500,
+                  color: '#111827',
+                }}
+              >
+                {progress}%
+              </span>
             </div>
-            <div style={{ height: 5, background: '#27272a', borderRadius: 5, overflow: 'hidden' }}>
-              <div style={{
-                width: `${progress}%`, height: '100%',
-                background: 'linear-gradient(90deg, #6c63ff, #00b894)',
-                borderRadius: 5, transition: 'width 0.4s ease'
-              }} />
+            <div
+              style={{
+                height: 4,
+                background: '#e5e7eb',
+                borderRadius: 999,
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  width: `${progress}%`,
+                  height: '100%',
+                  background: '#111827',
+                  borderRadius: 999,
+                  transition: 'width 0.3s ease',
+                }}
+              />
             </div>
           </div>
         )}
 
         {/* Button */}
         {file && !loading && !result && (
-          <button onClick={handleUpload} style={{
-            width: '100%', padding: 15, background: '#ffffff', color: '#050505',
-            border: 'none', borderRadius: 12, fontSize: 16,
-            cursor: 'pointer', fontWeight: 800, letterSpacing: '-0.3px'
-          }}>
-            Analyze with AI →
+          <button
+            onClick={handleUpload}
+            style={{
+              width: '100%',
+              padding: 12,
+              background: '#111827',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: 999,
+              fontSize: 14,
+              cursor: 'pointer',
+              fontWeight: 500,
+              marginTop: 4,
+            }}
+          >
+            Analyze and save item
           </button>
         )}
 
         {!loading && status.startsWith('Error') && (
-          <p style={{ color: '#e53e3e', fontSize: 14, textAlign: 'center' }}>{status}</p>
+          <p
+            style={{
+              color: '#b91c1c',
+              fontSize: 12,
+              textAlign: 'left',
+              marginTop: 8,
+            }}
+          >
+            {status}
+          </p>
         )}
 
         {/* Result */}
         {result && (
-          <div style={{ marginTop: 20, border: '1px solid #f0f0f0', borderRadius: 16, overflow: 'hidden' }}>
-            <div style={{ padding: '20px 20px 0', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 32, height: 32, background: 'rgba(16, 185, 129, 0.1)', borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center'
-              }}>✅</div>
-              <p style={{ fontWeight: 800, color: '#ffffff', margin: 0, fontSize: 16 }}>Added to wardrobe!</p>
-            </div>
+          <div
+            style={{
+              marginTop: 16,
+              border: '1px solid #e5e7eb',
+              borderRadius: 12,
+              background: '#ffffff',
+              padding: 12,
+            }}
+          >
+            <p
+              style={{
+                fontSize: 14,
+                fontWeight: 500,
+                margin: '0 0 8px',
+                color: '#111827',
+              }}
+            >
+              Item saved to your wardrobe.
+            </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px', marginBottom: 12 }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gap: 8,
+                marginBottom: 8,
+              }}
+            >
               {[
                 { l: 'Category', v: result.category },
                 { l: 'Color', v: result.primary_color },
                 { l: 'Style', v: result.style_tags?.join(', ') },
                 { l: 'Occasion', v: result.occasion?.join(', ') },
               ].map(i => (
-                <div key={i.l} style={{ background: '#111111', borderRadius: 10, padding: '10px 12px' }}>
-                  <p style={{
-                    color: '#52525b', fontSize: 10, fontWeight: 700,
-                    letterSpacing: 1.2, textTransform: 'uppercase', margin: '0 0 2px'
-                  }}>{i.l}</p>
-                  <p style={{
-                    color: '#ffffff', fontSize: 13, fontWeight: 700,
-                    margin: 0, textTransform: 'capitalize'
-                  }}>{i.v}</p>
+                <div
+                  key={i.l}
+                  style={{
+                    borderRadius: 8,
+                    border: '1px solid #e5e7eb',
+                    padding: '8px 10px',
+                  }}
+                >
+                  <p
+                    style={{
+                      color: '#9ca3af',
+                      fontSize: 10,
+                      fontWeight: 500,
+                      textTransform: 'uppercase',
+                      margin: '0 0 2px',
+                    }}
+                  >
+                    {i.l}
+                  </p>
+                  <p
+                    style={{
+                      color: '#111827',
+                      fontSize: 12,
+                      margin: 0,
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {i.v}
+                  </p>
                 </div>
               ))}
             </div>
 
-            <p style={{
-              color: '#a1a1aa', fontSize: 13, margin: '0 20px 20px',
-              background: '#111111', padding: '10px 12px', borderRadius: 10
-            }}>
+            <p
+              style={{
+                color: '#4b5563',
+                fontSize: 12,
+                margin: '0 0 10px',
+                lineHeight: 1.5,
+              }}
+            >
               {result.description}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px 20px' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flexWrap: 'wrap',
+              }}
+            >
               <button
-                onClick={() => { setFile(null); setPreview(null); setResult(null); setStatus(''); setProgress(0) }}
+                onClick={() => {
+                  setFile(null)
+                  setPreview(null)
+                  setResult(null)
+                  setStatus('')
+                  setProgress(0)
+                }}
                 style={{
-                  padding: 12, background: '#ffffff', color: '#050505', border: 'none',
-                  borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14
-                }}>
-                Add another
+                  padding: '8px 14px',
+                  background: '#111827',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: 999,
+                  cursor: 'pointer',
+                  fontSize: 13,
+                  fontWeight: 500,
+                }}
+              >
+                Add another item
               </button>
-              <a href="/wardrobe" style={{
-                padding: 12, background: 'rgba(139, 92, 246, 0.1)', color: '#a78bfa',
-                border: '1px solid #e0d9ff', borderRadius: 10, cursor: 'pointer',
-                fontWeight: 700, fontSize: 14, textDecoration: 'none', textAlign: 'center'
-              }}>
-                View wardrobe →
+              <a
+                href="/wardrobe"
+                style={{
+                  padding: '8px 14px',
+                  background: '#ffffff',
+                  color: '#111827',
+                  borderRadius: 999,
+                  border: '1px solid #e5e7eb',
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  fontWeight: 500,
+                }}
+              >
+                View wardrobe
               </a>
             </div>
           </div>

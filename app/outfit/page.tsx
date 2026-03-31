@@ -29,9 +29,9 @@ function SaveButton({ outfit, occasion, weather, style }: any) {
       disabled={saved || saving}
       style={{
         width: '100%', padding: 12, marginBottom: 10,
-        background: saved ? '#f0fdf4' : '#fff',
-        color: saved ? '#059669' : '#000',
-        border: `1px solid ${saved ? '#bbf7d0' : '#e0e0e0'}`,
+        background: saved ? 'rgba(16, 185, 129, 0.1)' : '#050505',
+        color: saved ? '#34d399' : '#ffffff',
+        border: `1px solid ${saved ? 'rgba(16, 185, 129, 0.2)' : '#27272a'}`,
         borderRadius: 8, cursor: saved ? 'default' : 'pointer',
         fontSize: 14, fontWeight: 600
       }}
@@ -84,9 +84,9 @@ export default function OutfitPage() {
     return (
       <button onClick={onClick} style={{
         padding: '7px 15px', borderRadius: 20, border: '1px solid',
-        borderColor: active ? color : '#eee',
-        background: active ? color : '#fff',
-        color: active ? '#fff' : '#666',
+        borderColor: active ? color : '#27272a',
+        background: active ? color : '#050505',
+        color: active ? '#050505' : '#a1a1aa',
         cursor: 'pointer', fontSize: 13, fontWeight: 500,
         textTransform: 'capitalize', transition: 'all 0.15s'
       }}>{label}</button>
@@ -94,12 +94,12 @@ export default function OutfitPage() {
   }
 
   function SectionLabel({ text }: any) {
-    return <p style={{ color: '#bbb', fontSize: 11, fontWeight: 700,
+    return <p style={{ color: '#52525b', fontSize: 11, fontWeight: 700,
       letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 10px' }}>{text}</p>
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: '#050505', fontFamily: 'system-ui, sans-serif' }}>
       <Navbar />
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '40px 24px' }}>
 
@@ -107,14 +107,14 @@ export default function OutfitPage() {
         <div style={{ display: 'flex', justifyContent: 'space-between',
           alignItems: 'flex-end', marginBottom: 28 }}>
           <div>
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#000',
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#ffffff',
               margin: '0 0 4px', letterSpacing: '-1px' }}>Outfit Generator</h1>
-            <p style={{ color: '#bbb', margin: 0, fontSize: 13 }}>
+            <p style={{ color: '#52525b', margin: 0, fontSize: 13 }}>
               {items.length} items in wardrobe
             </p>
           </div>
           <Link href="/wardrobe" style={{ padding: '8px 16px', border: '1px solid #eee',
-            color: '#555', borderRadius: 8, textDecoration: 'none', fontSize: 13 }}>
+            color: '#a1a1aa', borderRadius: 8, textDecoration: 'none', fontSize: 13 }}>
             My Wardrobe
           </Link>
         </div>
@@ -146,8 +146,8 @@ export default function OutfitPage() {
         {/* Generate button */}
         <button onClick={generate} disabled={loading} style={{
           width: '100%', padding: 16,
-          background: loading ? '#f5f5f5' : '#000',
-          color: loading ? '#aaa' : '#fff',
+          background: loading ? '#1a1a1c' : '#ffffff',
+          color: loading ? '#71717a' : '#050505',
           border: 'none', borderRadius: 12, fontSize: 17,
           fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer',
           letterSpacing: '-0.3px', marginBottom: 20
@@ -160,16 +160,16 @@ export default function OutfitPage() {
         {/* Result */}
         {outfit && outfitItems.length > 0 && (
           <div style={{ border: '1px solid #6c63ff33', borderRadius: 16,
-            overflow: 'hidden', background: '#fff' }}>
+            overflow: 'hidden', background: '#050505' }}>
 
             {/* Title bar */}
             <div style={{ padding: '20px 24px', borderBottom: '1px solid #f5f5f5' }}>
-              <h2 style={{ fontSize: 20, fontWeight: 900, color: '#000',
+              <h2 style={{ fontSize: 20, fontWeight: 900, color: '#ffffff',
                 margin: '0 0 8px', letterSpacing: '-0.5px' }}>{outfit.title}</h2>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {[occasion, weather, style].map(tag => (
                   <span key={tag} style={{ padding: '3px 10px', borderRadius: 20,
-                    background: '#f5f5f5', color: '#888', fontSize: 12,
+                    background: '#1a1a1c', color: '#71717a', fontSize: 12,
                     textTransform: 'capitalize' }}>{tag}</span>
                 ))}
               </div>
@@ -181,7 +181,7 @@ export default function OutfitPage() {
               gridTemplateColumns: `repeat(${Math.min(outfitItems.length, 4)}, 1fr)` }}>
               {outfitItems.map((item: any) => (
                 <div key={item.id} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #f0f0f0' }}>
-                  <div style={{ height: 140, background: '#f8f8f8' }}>
+                  <div style={{ height: 140, background: '#161618' }}>
                     {item.image_base64
                       ? <img src={item.image_base64} alt={item.category}
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -190,9 +190,9 @@ export default function OutfitPage() {
                     }
                   </div>
                   <div style={{ padding: '8px 10px' }}>
-                    <p style={{ color: '#000', fontSize: 12, fontWeight: 700,
+                    <p style={{ color: '#ffffff', fontSize: 12, fontWeight: 700,
                       margin: '0 0 1px', textTransform: 'capitalize' }}>{item.category}</p>
-                    <p style={{ color: '#bbb', fontSize: 11, margin: 0 }}>{item.primary_color}</p>
+                    <p style={{ color: '#52525b', fontSize: 11, margin: 0 }}>{item.primary_color}</p>
                   </div>
                 </div>
               ))}
@@ -200,16 +200,16 @@ export default function OutfitPage() {
 
             {/* Why + tip */}
             <div style={{ padding: '0 20px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div style={{ background: '#fafafa', borderRadius: 12, padding: '14px 16px' }}>
-                <p style={{ color: '#bbb', fontSize: 10, fontWeight: 700,
+              <div style={{ background: '#111111', borderRadius: 12, padding: '14px 16px' }}>
+                <p style={{ color: '#52525b', fontSize: 10, fontWeight: 700,
                   letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 6px' }}>Why this works</p>
-                <p style={{ color: '#333', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.reason}</p>
+                <p style={{ color: '#e5e7eb', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.reason}</p>
               </div>
-              <div style={{ background: '#f5f3ff', borderRadius: 12, padding: '14px 16px',
+              <div style={{ background: 'rgba(139, 92, 246, 0.1)', borderRadius: 12, padding: '14px 16px',
                 border: '1px solid #e0d9ff' }}>
                 <p style={{ color: '#a78bfa', fontSize: 10, fontWeight: 700,
                   letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 6px' }}>Styling tip</p>
-                <p style={{ color: '#6c63ff', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.tip}</p>
+                <p style={{ color: '#a78bfa', margin: 0, fontSize: 14, lineHeight: 1.6 }}>{outfit.tip}</p>
               </div>
                {/* Save button */}
                 {outfit && (
@@ -217,7 +217,7 @@ export default function OutfitPage() {
                  )}
 
               <button onClick={generate} style={{ width: '100%', padding: 12,
-                background: '#fff', color: '#6c63ff', border: '1px solid #e0d9ff',
+                background: '#050505', color: '#a78bfa', border: '1px solid #e0d9ff',
                 borderRadius: 10, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>
                 Generate another outfit →
               </button>

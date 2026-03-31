@@ -78,14 +78,16 @@ export default function UploadPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: '#050505', fontFamily: 'system-ui, sans-serif' }}>
       <Navbar />
       <div style={{ maxWidth: 520, margin: '48px auto', padding: '0 24px' }}>
 
         <div style={{ marginBottom: 32 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 900, color: '#000',
-            margin: '0 0 6px', letterSpacing: '-1px' }}>Add to wardrobe</h1>
-          <p style={{ color: '#888', margin: 0, fontSize: 15 }}>
+          <h1 style={{
+            fontSize: 28, fontWeight: 900, color: '#ffffff',
+            margin: '0 0 6px', letterSpacing: '-1px'
+          }}>Add to wardrobe</h1>
+          <p style={{ color: '#71717a', margin: 0, fontSize: 15 }}>
             Drop a photo — AI tags it automatically
           </p>
         </div>
@@ -97,9 +99,9 @@ export default function UploadPage() {
           onDragLeave={() => setDragging(false)}
           onDrop={handleDrop}
           style={{
-            border: `2px dashed ${dragging ? '#6c63ff' : '#e8e8e8'}`,
+            border: `2px dashed ${dragging ? '#a78bfa' : '#e8e8e8'}`,
             borderRadius: 16, overflow: 'hidden',
-            background: dragging ? '#f5f3ff' : preview ? '#000' : '#fafafa',
+            background: dragging ? 'rgba(139, 92, 246, 0.1)' : preview ? '#ffffff' : '#111111',
             cursor: 'pointer', transition: 'all 0.2s', marginBottom: 16,
             padding: preview ? 0 : 52, textAlign: 'center'
           }}
@@ -113,10 +115,10 @@ export default function UploadPage() {
           ) : (
             <>
               <div style={{ fontSize: 36, marginBottom: 10 }}>🧩</div>
-              <p style={{ color: '#333', fontWeight: 700, margin: '0 0 4px', fontSize: 15 }}>
+              <p style={{ color: '#e5e7eb', fontWeight: 700, margin: '0 0 4px', fontSize: 15 }}>
                 Drop your clothing photo here
               </p>
-              <p style={{ color: '#bbb', fontSize: 13, margin: 0 }}>
+              <p style={{ color: '#52525b', fontSize: 13, margin: 0 }}>
                 Click to browse · JPG or PNG
               </p>
             </>
@@ -127,10 +129,10 @@ export default function UploadPage() {
         {loading && (
           <div style={{ marginBottom: 16 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-              <span style={{ fontSize: 13, color: '#666' }}>{status}</span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: '#6c63ff' }}>{progress}%</span>
+              <span style={{ fontSize: 13, color: '#a1a1aa' }}>{status}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: '#a78bfa' }}>{progress}%</span>
             </div>
-            <div style={{ height: 5, background: '#f0f0f0', borderRadius: 5, overflow: 'hidden' }}>
+            <div style={{ height: 5, background: '#27272a', borderRadius: 5, overflow: 'hidden' }}>
               <div style={{
                 width: `${progress}%`, height: '100%',
                 background: 'linear-gradient(90deg, #6c63ff, #00b894)',
@@ -143,7 +145,7 @@ export default function UploadPage() {
         {/* Button */}
         {file && !loading && !result && (
           <button onClick={handleUpload} style={{
-            width: '100%', padding: 15, background: '#000', color: '#fff',
+            width: '100%', padding: 15, background: '#ffffff', color: '#050505',
             border: 'none', borderRadius: 12, fontSize: 16,
             cursor: 'pointer', fontWeight: 800, letterSpacing: '-0.3px'
           }}>
@@ -159,9 +161,11 @@ export default function UploadPage() {
         {result && (
           <div style={{ marginTop: 20, border: '1px solid #f0f0f0', borderRadius: 16, overflow: 'hidden' }}>
             <div style={{ padding: '20px 20px 0', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 32, height: 32, background: '#f0fdf4', borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✅</div>
-              <p style={{ fontWeight: 800, color: '#000', margin: 0, fontSize: 16 }}>Added to wardrobe!</p>
+              <div style={{
+                width: 32, height: 32, background: 'rgba(16, 185, 129, 0.1)', borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>✅</div>
+              <p style={{ fontWeight: 800, color: '#ffffff', margin: 0, fontSize: 16 }}>Added to wardrobe!</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px', marginBottom: 12 }}>
@@ -171,30 +175,40 @@ export default function UploadPage() {
                 { l: 'Style', v: result.style_tags?.join(', ') },
                 { l: 'Occasion', v: result.occasion?.join(', ') },
               ].map(i => (
-                <div key={i.l} style={{ background: '#fafafa', borderRadius: 10, padding: '10px 12px' }}>
-                  <p style={{ color: '#bbb', fontSize: 10, fontWeight: 700,
-                    letterSpacing: 1.2, textTransform: 'uppercase', margin: '0 0 2px' }}>{i.l}</p>
-                  <p style={{ color: '#000', fontSize: 13, fontWeight: 700,
-                    margin: 0, textTransform: 'capitalize' }}>{i.v}</p>
+                <div key={i.l} style={{ background: '#111111', borderRadius: 10, padding: '10px 12px' }}>
+                  <p style={{
+                    color: '#52525b', fontSize: 10, fontWeight: 700,
+                    letterSpacing: 1.2, textTransform: 'uppercase', margin: '0 0 2px'
+                  }}>{i.l}</p>
+                  <p style={{
+                    color: '#ffffff', fontSize: 13, fontWeight: 700,
+                    margin: 0, textTransform: 'capitalize'
+                  }}>{i.v}</p>
                 </div>
               ))}
             </div>
 
-            <p style={{ color: '#777', fontSize: 13, margin: '0 20px 20px',
-              background: '#fafafa', padding: '10px 12px', borderRadius: 10 }}>
+            <p style={{
+              color: '#a1a1aa', fontSize: 13, margin: '0 20px 20px',
+              background: '#111111', padding: '10px 12px', borderRadius: 10
+            }}>
               {result.description}
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '0 20px 20px' }}>
               <button
                 onClick={() => { setFile(null); setPreview(null); setResult(null); setStatus(''); setProgress(0) }}
-                style={{ padding: 12, background: '#000', color: '#fff', border: 'none',
-                  borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
+                style={{
+                  padding: 12, background: '#ffffff', color: '#050505', border: 'none',
+                  borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14
+                }}>
                 Add another
               </button>
-              <a href="/wardrobe" style={{ padding: 12, background: '#f5f3ff', color: '#6c63ff',
+              <a href="/wardrobe" style={{
+                padding: 12, background: 'rgba(139, 92, 246, 0.1)', color: '#a78bfa',
                 border: '1px solid #e0d9ff', borderRadius: 10, cursor: 'pointer',
-                fontWeight: 700, fontSize: 14, textDecoration: 'none', textAlign: 'center' }}>
+                fontWeight: 700, fontSize: 14, textDecoration: 'none', textAlign: 'center'
+              }}>
                 View wardrobe →
               </a>
             </div>

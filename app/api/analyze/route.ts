@@ -47,10 +47,36 @@ export async function POST(req: NextRequest) {
     }
 
     const text = data.choices[0].message.content
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) throw new Error('Could not parse AI response')
+    
+    let parsed
+    let extracted = text
+    const blockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/)
+    if (blockMatch) {
+      extracted = blockMatch[1]
+    }
 
-    const parsed = JSON.parse(jsonMatch[0])
+    try {
+      parsed = JSON.parse(extracted)
+    } catch {
+      const start = extracted.indexOf('{')
+      let end = extracted.lastIndexOf('}')
+      let found = false
+      
+      while (end > start) {
+        try {
+          parsed = JSON.parse(extracted.substring(start, end + 1))
+          found = true
+          break
+        } catch {
+          end = extracted.lastIndexOf('}', end - 1)
+        }
+      }
+      
+      if (!found) {
+        throw new Error('Could not parse AI response')
+      }
+    }
+
     return NextResponse.json(parsed)
 
   } catch (error: any) {

@@ -26,7 +26,7 @@ export default function LoginPage() {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#fff',
+      minHeight: '100vh', background: '#050505',
       fontFamily: 'system-ui, sans-serif',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
@@ -36,7 +36,7 @@ export default function LoginPage() {
       {/* Logo */}
       <div style={{ marginBottom: 40, textAlign: 'center' }}>
         <div style={{
-          width: 56, height: 56, background: '#000', borderRadius: 16,
+          width: 56, height: 56, background: '#ffffff', borderRadius: 16,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           margin: '0 auto 16px'
         }}>
@@ -46,12 +46,12 @@ export default function LoginPage() {
           </svg>
         </div>
         <h1 style={{
-          fontSize: 32, fontWeight: 900, color: '#000',
+          fontSize: 32, fontWeight: 900, color: '#ffffff',
           margin: '0 0 8px', letterSpacing: '-1px'
         }}>
-          Drip<span style={{ color: '#4f46e5' }}>AI</span>
+          Drip<span style={{ color: '#818cf8' }}>AI</span>
         </h1>
-        <p style={{ color: '#888', fontSize: 15, margin: 0, lineHeight: 1.5 }}>
+        <p style={{ color: '#71717a', fontSize: 15, margin: 0, lineHeight: 1.5 }}>
           Your AI-powered personal stylist
         </p>
       </div>
@@ -59,17 +59,17 @@ export default function LoginPage() {
       {/* Card */}
       <div style={{
         width: '100%', maxWidth: 400,
-        background: '#fff', borderRadius: 20,
+        background: '#050505', borderRadius: 20,
         border: '1px solid #f0f0f0', padding: '32px 24px'
       }}>
         <h2 style={{
-          fontSize: 20, fontWeight: 800, color: '#000',
+          fontSize: 20, fontWeight: 800, color: '#ffffff',
           margin: '0 0 6px', letterSpacing: '-0.5px', textAlign: 'center'
         }}>
           Welcome back
         </h2>
         <p style={{
-          color: '#aaa', fontSize: 14, margin: '0 0 24px',
+          color: '#71717a', fontSize: 14, margin: '0 0 24px',
           textAlign: 'center', lineHeight: 1.5
         }}>
           Sign in to access your wardrobe
@@ -96,10 +96,10 @@ export default function LoginPage() {
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               gap: 12, width: '100%', padding: '14px 20px',
-              background: loading === 'google' ? '#f9f9f9' : '#fff',
+              background: loading === 'google' ? '#f9f9f9' : '#050505',
               border: '1.5px solid #e0e0e0', borderRadius: 12,
               cursor: loading ? 'not-allowed' : 'pointer',
-              fontSize: 15, fontWeight: 600, color: '#000'
+              fontSize: 15, fontWeight: 600, color: '#ffffff'
             }}
           >
             {loading === 'google' ? (
@@ -119,9 +119,9 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ flex: 1, height: 1, background: '#f0f0f0' }} />
-            <span style={{ color: '#ccc', fontSize: 13 }}>or</span>
-            <div style={{ flex: 1, height: 1, background: '#f0f0f0' }} />
+            <div style={{ flex: 1, height: 1, background: '#27272a' }} />
+            <span style={{ color: '#52525b', fontSize: 13 }}>or</span>
+            <div style={{ flex: 1, height: 1, background: '#27272a' }} />
           </div>
 
           {/* Guest */}
@@ -130,10 +130,10 @@ export default function LoginPage() {
             disabled={!!loading}
             style={{
               width: '100%', padding: '14px 20px',
-              background: loading === 'guest' ? '#f5f3ff' : '#f5f3ff',
+              background: loading === 'guest' ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.1)',
               border: '1.5px solid #e0d9ff', borderRadius: 12,
               cursor: loading ? 'not-allowed' : 'pointer',
-              fontSize: 15, fontWeight: 600, color: '#4f46e5'
+              fontSize: 15, fontWeight: 600, color: '#818cf8'
             }}
           >
             {loading === 'guest' ? 'Setting up...' : 'Continue as Guest'}
@@ -141,13 +141,13 @@ export default function LoginPage() {
         </div>
 
         <p style={{
-          color: '#ccc', fontSize: 12, textAlign: 'center',
+          color: '#52525b', fontSize: 12, textAlign: 'center',
           marginTop: 20, lineHeight: 1.6
         }}>
           By continuing you agree to our{' '}
-          <span style={{ color: '#4f46e5', cursor: 'pointer' }}>Terms</span>
+          <span style={{ color: '#818cf8', cursor: 'pointer' }}>Terms</span>
           {' '}and{' '}
-          <span style={{ color: '#4f46e5', cursor: 'pointer' }}>Privacy Policy</span>
+          <span style={{ color: '#818cf8', cursor: 'pointer' }}>Privacy Policy</span>
         </p>
       </div>
 
@@ -155,11 +155,11 @@ export default function LoginPage() {
       <div style={{
         width: '100%', maxWidth: 400,
         marginTop: 16, padding: '20px 24px',
-        background: '#fafafa', borderRadius: 16,
+        background: '#111111', borderRadius: 16,
         border: '1px solid #f0f0f0'
       }}>
         <p style={{
-          color: '#aaa', fontSize: 11, fontWeight: 700,
+          color: '#71717a', fontSize: 11, fontWeight: 700,
           letterSpacing: 1.5, textTransform: 'uppercase',
           margin: '0 0 14px', textAlign: 'center'
         }}>
@@ -173,13 +173,13 @@ export default function LoginPage() {
             { title: 'Any occasion', desc: 'Office, college, party' },
           ].map(f => (
             <div key={f.title} style={{
-              background: '#fff', borderRadius: 10, padding: '12px',
+              background: '#050505', borderRadius: 10, padding: '12px',
               border: '1px solid #f0f0f0'
             }}>
-              <p style={{ fontSize: 13, fontWeight: 700, color: '#000', margin: '0 0 2px' }}>
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#ffffff', margin: '0 0 2px' }}>
                 {f.title}
               </p>
-              <p style={{ fontSize: 12, color: '#aaa', margin: 0 }}>
+              <p style={{ fontSize: 12, color: '#71717a', margin: 0 }}>
                 {f.desc}
               </p>
             </div>
@@ -190,7 +190,7 @@ export default function LoginPage() {
       {/* Quote */}
       <p style={{
         maxWidth: 340, textAlign: 'center',
-        color: '#ccc', fontSize: 13, lineHeight: 1.6,
+        color: '#52525b', fontSize: 13, lineHeight: 1.6,
         margin: '24px 0 0', fontStyle: 'italic'
       }}>
         "Style is not about having more clothes. It's about knowing what works."

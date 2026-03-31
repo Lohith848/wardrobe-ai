@@ -28,16 +28,16 @@ export default function Navbar() {
   const Logo = () => (
     <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
       <div style={{
-        width: 32, height: 32, background: '#000', borderRadius: 8,
+        width: 32, height: 32, background: '#ffffff', borderRadius: 8,
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
       }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          stroke="#050505" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
         </svg>
       </div>
-      <span style={{ fontWeight: 800, fontSize: 18, color: '#000', letterSpacing: '-0.5px' }}>
-        Drip<span style={{ color: '#4f46e5' }}>AI</span>
+      <span style={{ fontWeight: 800, fontSize: 18, color: '#ffffff', letterSpacing: '-0.5px' }}>
+        Drip<span style={{ color: '#818cf8' }}>AI</span>
       </span>
     </Link>
   )
@@ -56,7 +56,7 @@ export default function Navbar() {
       <nav style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '14px 24px', borderBottom: '1px solid #f0f0f0',
-        background: '#fff', position: 'sticky', top: 0, zIndex: 100
+        background: '#050505', position: 'sticky', top: 0, zIndex: 100
       }}>
         <Logo />
 
@@ -64,7 +64,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', gap: 4, alignItems: 'center' }} className="desktop-nav">
           {navLinks.map(link => (
             <Link key={link.href} href={link.href} style={{
-              color: isActive(link.href) ? '#000' : '#666',
+              color: isActive(link.href) ? '#ffffff' : '#a1a1aa',
               textDecoration: 'none', fontSize: 14,
               padding: '8px 12px', borderRadius: 8,
               fontWeight: isActive(link.href) ? 700 : 400,
@@ -77,22 +77,22 @@ export default function Navbar() {
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 8 }}>
               <div style={{
-                width: 32, height: 32, borderRadius: '50%', background: '#4f46e5',
+                width: 32, height: 32, borderRadius: '50%', background: '#818cf8',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontSize: 13, fontWeight: 700, flexShrink: 0
+                color: '#050505', fontSize: 13, fontWeight: 700, flexShrink: 0
               }}>
                 {user.email?.charAt(0).toUpperCase() || 'G'}
               </div>
               <button onClick={handleSignOut} style={{
-                padding: '7px 12px', background: '#fff', border: '1px solid #eee',
-                borderRadius: 8, cursor: 'pointer', fontSize: 13, color: '#555'
+                padding: '7px 12px', background: '#050505', border: '1px solid #eee',
+                borderRadius: 8, cursor: 'pointer', fontSize: 13, color: '#a1a1aa'
               }}>
                 Sign out
               </button>
             </div>
           ) : (
             <Link href="/login" style={{
-              padding: '8px 16px', background: '#000', color: '#fff',
+              padding: '8px 16px', background: '#ffffff', color: '#050505',
               borderRadius: 8, textDecoration: 'none', fontSize: 14,
               fontWeight: 600, marginLeft: 8
             }}>
@@ -110,16 +110,16 @@ export default function Navbar() {
             padding: 8, display: 'none'
           }}
         >
-          <div style={{ width: 22, height: 2, background: '#000', marginBottom: 5, borderRadius: 2 }} />
-          <div style={{ width: 22, height: 2, background: '#000', marginBottom: 5, borderRadius: 2 }} />
-          <div style={{ width: 22, height: 2, background: '#000', borderRadius: 2 }} />
+          <div style={{ width: 22, height: 2, background: '#ffffff', marginBottom: 5, borderRadius: 2 }} />
+          <div style={{ width: 22, height: 2, background: '#ffffff', marginBottom: 5, borderRadius: 2 }} />
+          <div style={{ width: 22, height: 2, background: '#ffffff', borderRadius: 2 }} />
         </button>
       </nav>
 
       {/* Mobile menu */}
       {menuOpen && (
         <div style={{
-          background: '#fff', borderBottom: '1px solid #f0f0f0',
+          background: '#050505', borderBottom: '1px solid #f0f0f0',
           padding: '12px 24px 20px', display: 'flex',
           flexDirection: 'column', gap: 4
         }} className="mobile-menu">
@@ -127,7 +127,7 @@ export default function Navbar() {
             <Link key={link.href} href={link.href}
               onClick={() => setMenuOpen(false)}
               style={{
-                color: isActive(link.href) ? '#4f46e5' : '#333',
+                color: isActive(link.href) ? '#818cf8' : '#e5e7eb',
                 textDecoration: 'none', fontSize: 16,
                 padding: '12px 0', fontWeight: isActive(link.href) ? 700 : 400,
                 borderBottom: '1px solid #f9f9f9'
@@ -145,8 +145,8 @@ export default function Navbar() {
             </button>
           ) : (
             <Link href="/login" onClick={() => setMenuOpen(false)} style={{
-              marginTop: 8, padding: '12px 16px', background: '#000',
-              color: '#fff', borderRadius: 8, textDecoration: 'none',
+              marginTop: 8, padding: '12px 16px', background: '#ffffff',
+              color: '#050505', borderRadius: 8, textDecoration: 'none',
               fontSize: 15, fontWeight: 600, textAlign: 'center'
             }}>
               Sign in

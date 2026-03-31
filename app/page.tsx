@@ -1,42 +1,42 @@
 'use client'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function HomePage() {
   return (
-    <div style={{
-      minHeight: '100vh', background: '#fff',
-      fontFamily: 'system-ui, sans-serif', color: '#111'
-    }}>
+    <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+      <div className="ambient-glow" />
+      <div className="ambient-glow-2" />
 
       {/* Navbar */}
-      <nav style={{
+      <nav className="glass-panel" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '16px 32px', borderBottom: '1px solid #f0f0f0',
-        background: '#fff', position: 'sticky', top: 0, zIndex: 100
+        padding: '16px 32px', position: 'sticky', top: 0, zIndex: 100, borderTop: 'none', borderLeft: 'none', borderRight: 'none'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, position: 'relative', zIndex: 10 }}>
           <div style={{
-            width: 32, height: 32, background: '#000', borderRadius: 8,
+            width: 36, height: 36, background: 'linear-gradient(135deg, #a78bfa, #ec4899)', borderRadius: 10,
             display: 'flex', alignItems: 'center', justifyContent: 'center'
           }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
               <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
             </svg>
           </div>
-          <span style={{ fontWeight: 800, fontSize: 18, color: '#000', letterSpacing: '-0.5px' }}>
-            Drip<span style={{ color: '#4f46e5' }}>AI</span>
+          <span style={{ fontWeight: 800, fontSize: 20, color: '#fff', letterSpacing: '-0.5px' }}>
+            Drip<span className="text-gradient">AI</span>
           </span>
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <Link href="/wardrobe" style={{ color: '#555', textDecoration: 'none', fontSize: 14, padding: '8px 16px' }}>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center', position: 'relative', zIndex: 10 }}>
+          <Link href="/wardrobe" style={{ color: '#a1a1aa', textDecoration: 'none', fontSize: 14, fontWeight: 500, transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = '#a1a1aa'}>
             Wardrobe
           </Link>
-          <Link href="/upload" style={{ color: '#555', textDecoration: 'none', fontSize: 14, padding: '8px 16px' }}>
+          <Link href="/upload" style={{ color: '#a1a1aa', textDecoration: 'none', fontSize: 14, fontWeight: 500, transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = '#a1a1aa'}>
             Upload
           </Link>
-          <Link href="/outfit" style={{
-            padding: '9px 20px', background: '#000', color: '#fff',
-            borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 700
+          <Link href="/outfit" className="glow-btn" style={{
+            padding: '10px 22px', borderRadius: 12, textDecoration: 'none', fontSize: 14, fontWeight: 700
           }}>
             Get Outfit
           </Link>
@@ -45,62 +45,58 @@ export default function HomePage() {
 
       {/* Hero */}
       <section style={{
-        maxWidth: 860, margin: '0 auto',
-        padding: '100px 24px 80px', textAlign: 'center'
+        maxWidth: 900, margin: '0 auto',
+        padding: '120px 24px 100px', textAlign: 'center', position: 'relative', zIndex: 10
       }}>
         <div style={{
-          display: 'inline-block', padding: '6px 16px',
-          background: '#f5f3ff', border: '1px solid #e0d9ff',
-          borderRadius: 20, color: '#4f46e5',
-          fontSize: 13, fontWeight: 600, marginBottom: 28
+          display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 18px',
+          background: 'rgba(167, 139, 250, 0.1)', border: '1px solid rgba(167, 139, 250, 0.2)',
+          borderRadius: 30, color: '#c4b5fd',
+          fontSize: 13, fontWeight: 600, marginBottom: 32, backdropFilter: 'blur(10px)'
         }}>
+          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#a78bfa', boxShadow: '0 0 10px #a78bfa'}} />
           AI-Powered Personal Stylist
         </div>
 
         <h1 style={{
-          fontSize: 62, fontWeight: 900, letterSpacing: '-2.5px',
-          lineHeight: 1.05, margin: '0 0 24px', color: '#000'
+          fontSize: 72, fontWeight: 900, letterSpacing: '-3px',
+          lineHeight: 1.1, margin: '0 0 28px', color: '#fff'
         }}>
           Dress with clarity.
           <br />
-          <span style={{ color: '#4f46e5' }}>Not confusion.</span>
+          <span className="text-gradient">Not confusion.</span>
         </h1>
 
         <p style={{
-          fontSize: 18, color: '#777', maxWidth: 500,
-          margin: '0 auto 40px', lineHeight: 1.7
+          fontSize: 19, color: '#a1a1aa', maxWidth: 540,
+          margin: '0 auto 48px', lineHeight: 1.6, fontWeight: 400
         }}>
           Upload your wardrobe, let AI analyze every item and get
-          perfect outfit combinations for any occasion — every single day.
+          prefect outfit combinations for any occasion — every single day.
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <Link href="/upload" style={{
-            padding: '15px 32px', background: '#000', color: '#fff',
-            borderRadius: 10, textDecoration: 'none',
-            fontSize: 15, fontWeight: 700, letterSpacing: '-0.3px'
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <Link href="/upload" className="glow-btn" style={{
+            padding: '16px 36px', borderRadius: 14, textDecoration: 'none',
+            fontSize: 16, fontWeight: 700, letterSpacing: '-0.3px'
           }}>
             Build my wardrobe
           </Link>
           <Link href="/outfit" style={{
-            padding: '15px 32px', background: '#f5f3ff', color: '#4f46e5',
-            borderRadius: 10, textDecoration: 'none', fontSize: 15,
-            fontWeight: 600, border: '1px solid #e0d9ff'
-          }}>
+            padding: '16px 36px', background: 'rgba(255,255,255,0.05)', color: '#fff',
+            borderRadius: 14, textDecoration: 'none', fontSize: 16, backdropFilter: 'blur(10px)',
+            fontWeight: 600, border: '1px solid rgba(255,255,255,0.1)', transition: 'all 0.3s'
+          }} onMouseEnter={e => {e.currentTarget.style.background='rgba(255,255,255,0.1)'}} 
+             onMouseLeave={e => {e.currentTarget.style.background='rgba(255,255,255,0.05)'}}>
             Generate outfit
           </Link>
         </div>
       </section>
 
       {/* Stats */}
-      <div style={{
-        borderTop: '1px solid #f0f0f0', borderBottom: '1px solid #f0f0f0',
-        background: '#fafafa'
-      }}>
+      <div style={{ position: 'relative', zIndex: 10, borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(10,10,12,0.5)', backdropFilter: 'blur(10px)' }}>
         <div style={{
-          maxWidth: 860, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-          padding: '32px 24px'
+          maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '40px 24px'
         }}>
           {[
             { number: '100%', label: 'Free forever' },
@@ -109,88 +105,62 @@ export default function HomePage() {
             { number: '< 1 min', label: 'Setup time' },
           ].map(stat => (
             <div key={stat.label} style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 22, fontWeight: 900, color: '#000',
-                margin: '0 0 4px', letterSpacing: '-0.5px' }}>
+              <p style={{ fontSize: 26, fontWeight: 900, color: '#fff', margin: '0 0 6px', letterSpacing: '-0.5px' }}>
                 {stat.number}
               </p>
-              <p style={{ fontSize: 13, color: '#aaa', margin: 0 }}>{stat.label}</p>
+              <p style={{ fontSize: 14, color: '#a1a1aa', margin: 0, fontWeight: 500 }}>{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* How it works */}
-      <div style={{ padding: '80px 24px', background: '#fff' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto' }}>
-          <p style={{ color: '#aaa', fontSize: 11, fontWeight: 700,
-            letterSpacing: 2, textTransform: 'uppercase',
-            textAlign: 'center', margin: '0 0 12px' }}>
+      <div style={{ padding: '100px 24px', position: 'relative', zIndex: 10 }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <p style={{ color: '#a78bfa', fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textAlign: 'center', margin: '0 0 16px' }}>
             How it works
           </p>
-          <h2 style={{ fontSize: 36, fontWeight: 900, color: '#000',
-            textAlign: 'center', margin: '0 0 48px', letterSpacing: '-1px' }}>
+          <h2 style={{ fontSize: 44, fontWeight: 900, color: '#fff', textAlign: 'center', margin: '0 0 64px', letterSpacing: '-1.5px' }}>
             Three steps to looking great
           </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: 20
-          }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
             {[
               {
-                step: '01',
-                title: 'Upload your wardrobe',
+                step: '01', title: 'Upload your wardrobe',
                 desc: 'Capture and organize everything you own in seconds. Drag and drop your photos.',
-                accent: '#4f46e5',
-                bg: '#f5f3ff',
-                border: '#e0d9ff'
+                accent: '#a78bfa', bg: 'rgba(167, 139, 250, 0.1)', border: 'rgba(167, 139, 250, 0.2)'
               },
               {
-                step: '02',
-                title: 'AI understands your style',
+                step: '02', title: 'AI understands your style',
                 desc: 'Each item is analyzed for color, category, occasion and style automatically.',
-                accent: '#059669',
-                bg: '#f0fdf4',
-                border: '#bbf7d0'
+                accent: '#34d399', bg: 'rgba(52, 211, 153, 0.1)', border: 'rgba(52, 211, 153, 0.2)'
               },
               {
-                step: '03',
-                title: 'Get refined outfits',
+                step: '03', title: 'Get refined outfits',
                 desc: 'Receive complete outfit combinations that work for your occasion and weather.',
-                accent: '#d97706',
-                bg: '#fffbeb',
-                border: '#fde68a'
+                accent: '#fbbf24', bg: 'rgba(251, 191, 36, 0.1)', border: 'rgba(251, 191, 36, 0.2)'
               },
             ].map(s => (
-              <div key={s.step} style={{
-                background: '#fff', borderRadius: 20, padding: 28,
-                border: '1px solid #f0f0f0', position: 'relative', overflow: 'hidden'
+              <div key={s.step} className="glass-panel hover-lift" style={{
+                borderRadius: 24, padding: 32, position: 'relative', overflow: 'hidden'
               }}>
                 <div style={{
-                  position: 'absolute', top: -8, right: 16,
-                  fontSize: 88, fontWeight: 900, color: '#f7f7f7',
-                  lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
-                  letterSpacing: '-4px'
+                  position: 'absolute', top: -10, right: 10,
+                  fontSize: 100, fontWeight: 900, color: 'rgba(255,255,255,0.03)',
+                  lineHeight: 1, userSelect: 'none', pointerEvents: 'none', letterSpacing: '-5px'
                 }}>
                   {s.step}
                 </div>
                 <div style={{
-                  width: 44, height: 44, background: s.bg,
-                  border: `1px solid ${s.border}`, borderRadius: 12,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: 20
+                  width: 52, height: 52, background: s.bg, border: `1px solid ${s.border}`, borderRadius: 16,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24
                 }}>
-                  <div style={{ width: 18, height: 18, borderRadius: 4, background: s.accent, opacity: 0.7 }} />
+                  <div style={{ width: 22, height: 22, borderRadius: 6, background: s.accent, boxShadow: `0 0 15px ${s.accent}` }} />
                 </div>
-                <p style={{ color: s.accent, fontSize: 11, fontWeight: 700,
-                  letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 8px' }}>
-                  Step {s.step}
-                </p>
-                <h3 style={{ fontSize: 17, fontWeight: 800, color: '#000',
-                  margin: '0 0 10px', letterSpacing: '-0.3px' }}>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.3px' }}>
                   {s.title}
                 </h3>
-                <p style={{ color: '#888', fontSize: 14, lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: '#a1a1aa', fontSize: 15, lineHeight: 1.6, margin: 0 }}>
                   {s.desc}
                 </p>
               </div>
@@ -199,101 +169,26 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Features */}
-      <div style={{ background: '#fafafa', padding: '80px 24px', borderTop: '1px solid #f0f0f0' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 32, fontWeight: 900, color: '#000',
-            textAlign: 'center', margin: '0 0 48px', letterSpacing: '-1px' }}>
-            Everything your wardrobe needs
-          </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: 16
-          }}>
-            {[
-              { title: 'Upload anything', desc: 'Shirts, pants, shoes, accessories — add your full closet in minutes' },
-              { title: 'AI vision analysis', desc: 'Automatically detects color, style, category and occasion for every item' },
-              { title: 'Smart outfits', desc: 'Complete outfit combinations based on occasion, weather and fashion style' },
-              { title: 'Styled for you', desc: 'Choose casual, streetwear, formal, preppy — AI matches your aesthetic' },
-            ].map((f, i) => (
-              <div key={f.title} style={{
-                background: '#fff', borderRadius: 16, padding: 24,
-                border: '1px solid #f0f0f0'
-              }}>
-                <div style={{
-                  width: 36, height: 36, borderRadius: 10,
-                  background: '#f5f3ff', border: '1px solid #e0d9ff',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: 16
-                }}>
-                  <span style={{ fontSize: 14, fontWeight: 900, color: '#4f46e5' }}>
-                    0{i + 1}
-                  </span>
-                </div>
-                <h3 style={{ color: '#000', margin: '0 0 8px',
-                  fontSize: 15, fontWeight: 700, letterSpacing: '-0.3px' }}>
-                  {f.title}
-                </h3>
-                <p style={{ color: '#999', margin: 0, lineHeight: 1.6, fontSize: 13 }}>
-                  {f.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Quote */}
-      <div style={{
-        maxWidth: 700, margin: '0 auto',
-        padding: '80px 24px', textAlign: 'center'
-      }}>
-        <p style={{
-          fontSize: 28, fontWeight: 900, color: '#000',
-          lineHeight: 1.4, letterSpacing: '-1px', margin: '0 0 16px'
-        }}>
-          "The right outfit doesn't just change how you look — it changes how you move through the world."
-        </p>
-        <p style={{ color: '#bbb', fontSize: 14, margin: 0, fontWeight: 500 }}>
-          — DripAI
-        </p>
-      </div>
-
-      {/* Bottom CTA bar */}
-      <div style={{ borderTop: '1px solid #f0f0f0' }}>
-        <div style={{
-          maxWidth: 860, margin: '0 auto',
-          padding: '32px 24px',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          flexWrap: 'wrap', gap: 16
-        }}>
+      {/* Footer */}
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(0,0,0,0.5)', position: 'relative', zIndex: 10 }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '40px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
           <div>
-            <p style={{ fontSize: 18, fontWeight: 800, color: '#000',
-              margin: '0 0 4px', letterSpacing: '-0.5px' }}>
+            <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', margin: '0 0 6px', letterSpacing: '-0.5px' }}>
               Start building your style system
             </p>
-            <p style={{ color: '#aaa', fontSize: 14, margin: 0 }}>
+            <p style={{ color: '#a1a1aa', fontSize: 15, margin: 0 }}>
               No noise. No clutter. Just better decisions.
             </p>
           </div>
-          <Link href="/upload" style={{
-            padding: '12px 28px', background: '#000', color: '#fff',
-            borderRadius: 10, textDecoration: 'none',
-            fontSize: 14, fontWeight: 700, whiteSpace: 'nowrap'
+          <Link href="/upload" className="glow-btn" style={{
+            padding: '14px 32px', borderRadius: 12, textDecoration: 'none', fontSize: 15, fontWeight: 700, whiteSpace: 'nowrap'
           }}>
             Get started
           </Link>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div style={{
-        textAlign: 'center', padding: '20px',
-        borderTop: '1px solid #f0f0f0',
-        color: '#ddd', fontSize: 13
-      }}>
-        DripAI — Built with precision
+        <div style={{ textAlign: 'center', padding: '24px', borderTop: '1px solid rgba(255,255,255,0.05)', color: '#52525b', fontSize: 14, fontWeight: 500 }}>
+          DripAI — Built with precision
+        </div>
       </div>
     </div>
   )

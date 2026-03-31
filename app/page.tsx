@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 
 export default function HomePage() {
   return (
@@ -19,7 +18,7 @@ export default function HomePage() {
             display: 'flex', alignItems: 'center', justifyContent: 'center'
           }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
+              <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z" />
             </svg>
           </div>
           <span style={{ fontWeight: 800, fontSize: 20, color: '#fff', letterSpacing: '-0.5px' }}>
@@ -54,7 +53,7 @@ export default function HomePage() {
           borderRadius: 30, color: '#c4b5fd',
           fontSize: 13, fontWeight: 600, marginBottom: 32, backdropFilter: 'blur(10px)'
         }}>
-          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#a78bfa', boxShadow: '0 0 10px #a78bfa'}} />
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#a78bfa', boxShadow: '0 0 10px #a78bfa' }} />
           AI-Powered Personal Stylist
         </div>
 
@@ -86,8 +85,8 @@ export default function HomePage() {
             padding: '16px 36px', background: 'rgba(255,255,255,0.05)', color: '#fff',
             borderRadius: 14, textDecoration: 'none', fontSize: 16, backdropFilter: 'blur(10px)',
             fontWeight: 600, border: '1px solid rgba(255,255,255,0.1)', transition: 'all 0.3s'
-          }} onMouseEnter={e => {e.currentTarget.style.background='rgba(255,255,255,0.1)'}} 
-             onMouseLeave={e => {e.currentTarget.style.background='rgba(255,255,255,0.05)'}}>
+          }} onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}>
             Generate outfit
           </Link>
         </div>

@@ -1,0 +1,99 @@
+
+> wardrobe-ai@0.1.0 lint
+> eslint
+
+
+C:\Users\Lohith G\wardrobe-ai\app\api\analyze\route.ts
+  82:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lohith G\wardrobe-ai\app\api\outfit\route.ts
+   11:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   94:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  103:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lohith G\wardrobe-ai\app\components\AuthGuard.tsx
+  22:6  warning  React Hook useEffect has missing dependencies: 'publicPaths' and 'router'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Lohith G\wardrobe-ai\app\components\Navbar.tsx
+   8:36  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  61:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Lohith G\wardrobe-ai\app\components\Navbar.tsx:61:10
+  59 |         background: '#050505', position: 'sticky', top: 0, zIndex: 100
+  60 |       }}>
+> 61 |         <Logo />
+     |          ^^^^ This component is created during render
+  62 |
+  63 |         {/* Desktop links */}
+  64 |         <div style={{ display: 'flex', gap: 4, alignItems: 'center' }} className="desktop-nav">
+
+C:\Users\Lohith G\wardrobe-ai\app\components\Navbar.tsx:28:16
+  26 |   }
+  27 |
+> 28 |   const Logo = () => (
+     |                ^^^^^^^
+> 29 |     <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 30 |       <div style={{
+     ???
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     </Link>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 43 |   )
+     | ^^^^ The component is created during render here
+  44 |
+  45 |   const isActive = (href: string) => pathname === href
+  46 |  react-hooks/static-components
+
+C:\Users\Lohith G\wardrobe-ai\app\login\page.tsx
+  196:9   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  196:52  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  196:80  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\Lohith G\wardrobe-ai\app\outfit\page.tsx
+    6:59  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   49:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   53:40  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:50  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   79:17  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   83:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   96:35  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  182:39  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  186:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\Lohith G\wardrobe-ai\app\saved\page.tsx
+  8:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lohith G\wardrobe-ai\app\upload\page.tsx
+   29:40  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   74:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  112:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\Lohith G\wardrobe-ai\app\wardrobe\page.tsx
+   10:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+   11:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+   26:9   error    'r' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        prefer-const
+   30:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Lohith G\wardrobe-ai\app\wardrobe\page.tsx:30:5
+  28 |     else if (sortBy === 'oldest') r.sort((a,b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+  29 |     else if (sortBy === 'color') r.sort((a,b) => (a.primary_color||'').localeCompare(b.primary_color||''))
+> 30 |     setFiltered(r)
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  31 |   }, [activeFilter, sortBy, items])
+  32 |
+  33 |   async function deleteItem(id: string) {  react-hooks/set-state-in-effect
+  119:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @next/next/no-img-element
+  148:70  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+
+??? 29 problems (25 errors, 4 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

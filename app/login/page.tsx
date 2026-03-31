@@ -193,7 +193,7 @@ export default function LoginPage() {
         color: '#52525b', fontSize: 13, lineHeight: 1.6,
         margin: '24px 0 0', fontStyle: 'italic'
       }}>
-        "Style is not about having more clothes. It's about knowing what works."
+        &quot;Style is not about having more clothes. It&apos;s about knowing what works.&quot;
       </p>
     </div>
   )

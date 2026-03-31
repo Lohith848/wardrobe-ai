@@ -5,18 +5,50 @@ import { supabase } from '../lib/supabase'
 import { useRouter, usePathname } from 'next/navigation'
 
 const Logo = () => (
-  <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-    <div style={{
-      width: 32, height: 32, background: '#ffffff', borderRadius: 8,
-      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
-    }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-        stroke="#050505" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
+  <Link
+    href="/"
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      textDecoration: 'none',
+    }}
+  >
+    <div
+      style={{
+        width: 28,
+        height: 28,
+        borderRadius: 8,
+        border: '1px solid #e5e7eb',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#ffffff',
+        flexShrink: 0,
+      }}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#111827"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z" />
       </svg>
     </div>
-    <span style={{ fontWeight: 800, fontSize: 18, color: '#ffffff', letterSpacing: '-0.5px' }}>
-      Drip<span style={{ color: '#818cf8' }}>AI</span>
+    <span
+      style={{
+        fontWeight: 700,
+        fontSize: 17,
+        color: '#111827',
+        letterSpacing: '-0.3px',
+      }}
+    >
+      Wardrobe<span style={{ color: '#4f46e5' }}>AI</span>
     </span>
   </Link>
 )
@@ -45,6 +77,7 @@ export default function Navbar() {
   const isActive = (href: string) => pathname === href
 
   const navLinks = [
+    { href: '/', label: 'Home' },
     { href: '/wardrobe', label: 'Wardrobe' },
     { href: '/upload', label: 'Upload' },
     { href: '/outfit', label: 'Generate outfit' },
@@ -53,49 +86,89 @@ export default function Navbar() {
 
   return (
     <>
-      <nav style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '14px 24px', borderBottom: '1px solid #f0f0f0',
-        background: '#050505', position: 'sticky', top: 0, zIndex: 100
-      }}>
+      <nav
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '12px 20px',
+          borderBottom: '1px solid #e5e7eb',
+          background: '#ffffff',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+        }}
+      >
         <Logo />
 
         {/* Desktop links */}
         <div style={{ display: 'flex', gap: 4, alignItems: 'center' }} className="desktop-nav">
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} style={{
-              color: isActive(link.href) ? '#ffffff' : '#a1a1aa',
-              textDecoration: 'none', fontSize: 14,
-              padding: '8px 12px', borderRadius: 8,
-              fontWeight: isActive(link.href) ? 700 : 400,
-              borderBottom: isActive(link.href) ? '2px solid #4f46e5' : '2px solid transparent'
-            }}>
+            <Link
+              key={link.href}
+              href={link.href}
+              style={{
+                color: isActive(link.href) ? '#111827' : '#6b7280',
+                textDecoration: 'none',
+                fontSize: 14,
+                padding: '8px 12px',
+                borderRadius: 999,
+                fontWeight: isActive(link.href) ? 600 : 400,
+                backgroundColor: isActive(link.href) ? '#e5e7eb' : 'transparent',
+              }}
+            >
               {link.label}
             </Link>
           ))}
 
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 8 }}>
-              <div style={{
-                width: 32, height: 32, borderRadius: '50%', background: '#818cf8',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#050505', fontSize: 13, fontWeight: 700, flexShrink: 0
-              }}>
+              <div
+                style={{
+                  width: 30,
+                  height: 30,
+                  borderRadius: '999px',
+                  background: '#e5e7eb',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#374151',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  flexShrink: 0,
+                }}
+              >
                 {user.email?.charAt(0).toUpperCase() || 'G'}
               </div>
-              <button onClick={handleSignOut} style={{
-                padding: '7px 12px', background: '#050505', border: '1px solid #eee',
-                borderRadius: 8, cursor: 'pointer', fontSize: 13, color: '#a1a1aa'
-              }}>
+              <button
+                onClick={handleSignOut}
+                style={{
+                  padding: '7px 12px',
+                  background: '#ffffff',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: 8,
+                  cursor: 'pointer',
+                  fontSize: 13,
+                  color: '#374151',
+                }}
+              >
                 Sign out
               </button>
             </div>
           ) : (
-            <Link href="/login" style={{
-              padding: '8px 16px', background: '#ffffff', color: '#050505',
-              borderRadius: 8, textDecoration: 'none', fontSize: 14,
-              fontWeight: 600, marginLeft: 8
-            }}>
+            <Link
+              href="/login"
+              style={{
+                padding: '8px 16px',
+                background: '#111827',
+                color: '#ffffff',
+                borderRadius: 8,
+                textDecoration: 'none',
+                fontSize: 14,
+                fontWeight: 600,
+                marginLeft: 8,
+              }}
+            >
               Sign in
             </Link>
           )}
@@ -106,49 +179,81 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="mobile-menu-btn"
           style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            padding: 8, display: 'none'
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 6,
+            display: 'none',
           }}
         >
-          <div style={{ width: 22, height: 2, background: '#ffffff', marginBottom: 5, borderRadius: 2 }} />
-          <div style={{ width: 22, height: 2, background: '#ffffff', marginBottom: 5, borderRadius: 2 }} />
-          <div style={{ width: 22, height: 2, background: '#ffffff', borderRadius: 2 }} />
+          <div style={{ width: 20, height: 2, background: '#111827', marginBottom: 4, borderRadius: 2 }} />
+          <div style={{ width: 20, height: 2, background: '#111827', marginBottom: 4, borderRadius: 2 }} />
+          <div style={{ width: 20, height: 2, background: '#111827', borderRadius: 2 }} />
         </button>
       </nav>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{
-          background: '#050505', borderBottom: '1px solid #f0f0f0',
-          padding: '12px 24px 20px', display: 'flex',
-          flexDirection: 'column', gap: 4
-        }} className="mobile-menu">
+        <div
+          style={{
+            background: '#ffffff',
+            borderBottom: '1px solid #e5e7eb',
+            padding: '10px 20px 16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+          }}
+          className="mobile-menu"
+        >
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href}
+            <Link
+              key={link.href}
+              href={link.href}
               onClick={() => setMenuOpen(false)}
               style={{
-                color: isActive(link.href) ? '#818cf8' : '#e5e7eb',
-                textDecoration: 'none', fontSize: 16,
-                padding: '12px 0', fontWeight: isActive(link.href) ? 700 : 400,
-                borderBottom: '1px solid #f9f9f9'
-              }}>
+                color: isActive(link.href) ? '#111827' : '#6b7280',
+                textDecoration: 'none',
+                fontSize: 15,
+                padding: '10px 0',
+                fontWeight: isActive(link.href) ? 600 : 400,
+              }}
+            >
               {link.label}
             </Link>
           ))}
           {user ? (
-            <button onClick={handleSignOut} style={{
-              marginTop: 8, padding: '12px 0', background: 'none',
-              border: 'none', cursor: 'pointer', fontSize: 16,
-              color: '#e53e3e', textAlign: 'left', fontWeight: 600
-            }}>
+            <button
+              onClick={handleSignOut}
+              style={{
+                marginTop: 8,
+                padding: '10px 0',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: 14,
+                color: '#b91c1c',
+                textAlign: 'left',
+                fontWeight: 600,
+              }}
+            >
               Sign out
             </button>
           ) : (
-            <Link href="/login" onClick={() => setMenuOpen(false)} style={{
-              marginTop: 8, padding: '12px 16px', background: '#ffffff',
-              color: '#050505', borderRadius: 8, textDecoration: 'none',
-              fontSize: 15, fontWeight: 600, textAlign: 'center'
-            }}>
+            <Link
+              href="/login"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                marginTop: 8,
+                padding: '10px 14px',
+                background: '#111827',
+                color: '#ffffff',
+                borderRadius: 8,
+                textDecoration: 'none',
+                fontSize: 14,
+                fontWeight: 600,
+                textAlign: 'center',
+              }}
+            >
               Sign in
             </Link>
           )}

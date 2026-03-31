@@ -28,12 +28,16 @@ function SaveButton({ outfit, occasion, weather, style }: any) {
       onClick={saveOutfit}
       disabled={saved || saving}
       style={{
-        width: '100%', padding: 12, marginBottom: 10,
-        background: saved ? 'rgba(16, 185, 129, 0.1)' : '#050505',
-        color: saved ? '#34d399' : '#ffffff',
-        border: `1px solid ${saved ? 'rgba(16, 185, 129, 0.2)' : '#27272a'}`,
-        borderRadius: 8, cursor: saved ? 'default' : 'pointer',
-        fontSize: 14, fontWeight: 600
+        width: '100%',
+        padding: 10,
+        marginBottom: 0,
+        background: saved ? '#f0fdf4' : '#111827',
+        color: saved ? '#166534' : '#ffffff',
+        border: `1px solid ${saved ? '#bbf7d0' : '#111827'}`,
+        borderRadius: 999,
+        cursor: saved ? 'default' : 'pointer',
+        fontSize: 13,
+        fontWeight: 500,
       }}
     >
       {saving ? 'Saving...' : saved ? 'Saved to collection' : 'Save this outfit'}
@@ -83,19 +87,36 @@ export default function OutfitPage() {
   function Pill({ label, active, color, onClick }: any) {
     return (
       <button onClick={onClick} style={{
-        padding: '7px 15px', borderRadius: 20, border: '1px solid',
-        borderColor: active ? color : '#27272a',
-        background: active ? color : '#050505',
-        color: active ? '#050505' : '#a1a1aa',
-        cursor: 'pointer', fontSize: 13, fontWeight: 500,
-        textTransform: 'capitalize', transition: 'all 0.15s'
+        padding: '7px 12px',
+        borderRadius: 999,
+        border: '1px solid',
+        borderColor: active ? color : '#d1d5db',
+        background: active ? color : '#ffffff',
+        color: active ? '#ffffff' : '#374151',
+        cursor: 'pointer',
+        fontSize: 12,
+        fontWeight: 500,
+        textTransform: 'capitalize',
+        transition: 'all 0.15s',
       }}>{label}</button>
     )
   }
 
   function SectionLabel({ text }: any) {
-    return <p style={{ color: '#52525b', fontSize: 11, fontWeight: 700,
-      letterSpacing: 1.5, textTransform: 'uppercase', margin: '0 0 10px' }}>{text}</p>
+    return (
+      <p
+        style={{
+          color: '#6b7280',
+          fontSize: 11,
+          fontWeight: 600,
+          letterSpacing: 1.2,
+          textTransform: 'uppercase',
+          margin: '0 0 10px',
+        }}
+      >
+        {text}
+      </p>
+    )
   }
 
   return (

@@ -50,6 +50,13 @@ export default function UploadPage() {
     if (!file) return
     setLoading(true)
     try {
+      // FIX #1: Get authenticated user before inserting
+      setStatus('Verifying user...'); setProgress(10)
+      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      if (userError || !user) {
+        throw new Error('User not authenticated. Please sign in first.')
+      }
+
       setStatus('Preparing image...'); setProgress(20)
       const compressed = await compressImage(file)
       const base64Only = compressed.split(',')[1]
@@ -63,10 +70,15 @@ export default function UploadPage() {
       if (analysis.error) throw new Error(analysis.error)
 
       setStatus('Saving to wardrobe...'); setProgress(85)
+      // FIX #2: Include user_id in INSERT to satisfy RLS policy
       const { error } = await supabase.from('wardrobe_items').insert({
-        image_base64: compressed, category: analysis.category,
-        primary_color: analysis.primary_color, style_tags: analysis.style_tags,
-        occasion: analysis.occasion, description: analysis.description
+        user_id: user.id,  // ✅ REQUIRED for RLS policy
+        image_base64: compressed,
+        category: analysis.category,
+        primary_color: analysis.primary_color,
+        style_tags: analysis.style_tags,
+        occasion: analysis.occasion,
+        description: analysis.description
       })
       if (error) throw error
 

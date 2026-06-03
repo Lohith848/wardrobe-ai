@@ -1,16 +1,16 @@
-👔 Wardrobe AI
+## Features AI
 
 Transform your wardrobe into a personal AI stylist.
 
 Wardrobe AI helps users organize their clothing digitally and generate personalized outfit recommendations based on weather, location, occasion, and mood.
 
-✨ Features
+## Features
 
-📸 Smart Clothing Upload
+Smart Clothing Upload
 
 Upload images of your clothes, shoes, and accessories.
 
-🤖 AI Clothing Analysis
+## AI Clothing Analysis
 
 Wardrobe AI automatically analyzes uploaded items and identifies:
 
@@ -20,7 +20,7 @@ Wardrobe AI automatically analyzes uploaded items and identifies:
 - Material and texture
 - Seasonal suitability
 
-👕 Digital Wardrobe
+## Digital Wardrobe
 
 All analyzed items are stored in a personal wardrobe where users can:
 
@@ -29,7 +29,7 @@ All analyzed items are stored in a personal wardrobe where users can:
 - Manage outfits
 - Track frequently used clothes
 
-🎯 AI Outfit Generator
+## AI Outfit Generator
 
 Generate outfit recommendations based on:
 
@@ -42,10 +42,10 @@ Generate outfit recommendations based on:
 Examples:
 
 Situation| Generated Outfit
-Sunny Day ☀️| White Linen Shirt + Beige Chinos + Sneakers
-College 📚| Graphic Tee + Jeans + Casual Shoes
-Formal Meeting 💼| Blazer + Formal Shirt + Trousers
-Date Night ❤️| Black Shirt + Dark Denim + Watch
+Sunny Day | White Linen Shirt + Beige Chinos + Sneakers
+College | Graphic Tee + Jeans + Casual Shoes
+Formal Meeting | Blazer + Formal Shirt + Trousers
+Date Night | Black Shirt + Dark Denim + Watch
 
 🕶️ Accessory Matching
 
@@ -58,7 +58,7 @@ AI recommends matching:
 - Jewelry
 - Hats
 
-🌤️ Weather-Aware Styling
+## Weather-Aware Styling
 
 Real-time weather integration ensures outfits are suitable for:
 
@@ -67,15 +67,15 @@ Real-time weather integration ensures outfits are suitable for:
 - Humidity
 - Wind conditions
 
-💾 Save Outfit Collections
+## Mix Outfit Collections
 
 Save your favorite AI-generated outfits for future use and quick access.
 
-🔄 Mix & Match Suggestions
+## Mix & Match Suggestions
 
 Discover new outfit combinations from existing wardrobe items.
 
-🚀 How It Works
+## How It Works
 
 1. Upload images of clothes and accessories.
 2. AI analyzes each item and extracts fashion attributes.
@@ -88,7 +88,7 @@ Discover new outfit combinations from existing wardrobe items.
 5. AI generates personalized outfit recommendations.
 6. Save outfits and revisit them anytime.
 
-🛠️ Tech Stack
+## Tech Stack
 
 - Next.js
 - TypeScript
@@ -98,7 +98,7 @@ Discover new outfit combinations from existing wardrobe items.
 - OpenAI APIs
 - Image Processing
 
-🎯 Use Cases
+## Use Cases
 
 - Daily outfit planning
 - College and office dressing
@@ -107,7 +107,7 @@ Discover new outfit combinations from existing wardrobe items.
 - Wardrobe organization
 - Personal styling
 
-📸 Example Workflow
+## FutureWorkflow
 
 Upload Image
       ↓
@@ -119,9 +119,9 @@ Select Mood + Weather + Occasion
       ↓
 AI Outfit Generation
       ↓
-Save Outfit
+Save OuOutfit
 
-🔮 Future Enhancements
+## Future Enhancements
 
 - Virtual Try-On
 - Outfit Rating System
@@ -130,16 +130,16 @@ Save Outfit
 - Social Outfit Sharing
 - Capsule Wardrobe Generator
 
-🤝 Contributing
+## Contributing
 
 Contributions, feature requests, and suggestions are welcome.
 
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
-4. Open a Pull Request
+4. Open a Pull ReRequest
 
-📄 License
+## License
 
 This project is licensed under the MIT License.
 

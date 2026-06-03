@@ -1,38 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+👔 Wardrobe AI
 
-## Getting Started
+Transform your wardrobe into a personal AI stylist.
 
-First, run the development server:
+Wardrobe AI helps users organize their clothing digitally and generate personalized outfit recommendations based on weather, location, occasion, and mood.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📸 Smart Clothing Upload
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Upload images of your clothes, shoes, and accessories.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🤖 AI Clothing Analysis
 
-## Learn More
+Wardrobe AI automatically analyzes uploaded items and identifies:
 
-To learn more about Next.js, take a look at the following resources:
+- Clothing type (Shirt, T-Shirt, Jeans, Hoodie, etc.)
+- Color palette
+- Style category
+- Material and texture
+- Seasonal suitability
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+👕 Digital Wardrobe
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All analyzed items are stored in a personal wardrobe where users can:
 
-## Deploy on Vercel
+- Browse their collection
+- Search and filter items
+- Manage outfits
+- Track frequently used clothes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎯 AI Outfit Generator
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Generate outfit recommendations based on:
 
-Made by Lohith G
+- 🌦️ Weather conditions
+- 📍 Location
+- 😊 Mood
+- 🎉 Occasion
+- 👔 Dress code preferences
+
+Examples:
+
+Situation| Generated Outfit
+Sunny Day ☀️| White Linen Shirt + Beige Chinos + Sneakers
+College 📚| Graphic Tee + Jeans + Casual Shoes
+Formal Meeting 💼| Blazer + Formal Shirt + Trousers
+Date Night ❤️| Black Shirt + Dark Denim + Watch
+
+🕶️ Accessory Matching
+
+AI recommends matching:
+
+- Watches
+- Sunglasses
+- Shoes
+- Bags
+- Jewelry
+- Hats
+
+🌤️ Weather-Aware Styling
+
+Real-time weather integration ensures outfits are suitable for:
+
+- Temperature
+- Rain
+- Humidity
+- Wind conditions
+
+💾 Save Outfit Collections
+
+Save your favorite AI-generated outfits for future use and quick access.
+
+🔄 Mix & Match Suggestions
+
+Discover new outfit combinations from existing wardrobe items.
+
+🚀 How It Works
+
+1. Upload images of clothes and accessories.
+2. AI analyzes each item and extracts fashion attributes.
+3. Items are saved to your digital wardrobe.
+4. Select:
+   - Weather
+   - Location
+   - Mood
+   - Occasion
+5. AI generates personalized outfit recommendations.
+6. Save outfits and revisit them anytime.
+
+🛠️ Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Supabase
+- AI Vision Models
+- OpenAI APIs
+- Image Processing
+
+🎯 Use Cases
+
+- Daily outfit planning
+- College and office dressing
+- Travel packing assistance
+- Fashion inspiration
+- Wardrobe organization
+- Personal styling
+
+📸 Example Workflow
+
+Upload Image
+      ↓
+AI Clothing Analysis
+      ↓
+Digital Wardrobe Storage
+      ↓
+Select Mood + Weather + Occasion
+      ↓
+AI Outfit Generation
+      ↓
+Save Outfit
+
+🔮 Future Enhancements
+
+- Virtual Try-On
+- Outfit Rating System
+- Fashion Trend Analysis
+- Shopping Recommendations
+- Social Outfit Sharing
+- Capsule Wardrobe Generator
+
+🤝 Contributing
+
+Contributions, feature requests, and suggestions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
+
+📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+Built because choosing what to wear shouldn't be harder than building the app. 🌻

@@ -33,11 +33,11 @@ All analyzed items are stored in a personal wardrobe where users can:
 
 Generate outfit recommendations based on:
 
-- 🌦️ Weather conditions
-- 📍 Location
-- 😊 Mood
-- 🎉 Occasion
-- 👔 Dress code preferences
+- Weather conditions
+- Location
+- Mood
+- Occasion
+- Dress code preferences
 
 Examples:
 
@@ -145,4 +145,4 @@ This project is licensed under the MIT License.
 
 ---
 
-Built because choosing what to wear shouldn't be harder than building the app. 🌻
+Built because choosing what to wear shouldn't be harder than building the app - Lohith G 🌻

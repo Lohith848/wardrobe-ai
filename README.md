@@ -145,4 +145,6 @@ This project is licensed under the MIT License.
 
 ---
 
+## Author
+
 Built because choosing what to wear shouldn't be harder than building the app - Lohith G 🌻

@@ -47,7 +47,7 @@ College | Graphic Tee + Jeans + Casual Shoes
 Formal Meeting | Blazer + Formal Shirt + Trousers
 Date Night | Black Shirt + Dark Denim + Watch
 
-🕶️ Accessory Matching
+ Accessory Matching
 
 AI recommends matching:
 

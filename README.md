@@ -1,4 +1,4 @@
-## Wardrobe AI
+## Wardrobe AI 
 
 Transform your wardrobe into a personal AI stylist.
 

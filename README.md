@@ -1,6 +1,6 @@
 ## Wardrobe AI
 
-Transform your wardrobe into a personal stylist.
+Transform your wardrobe into a personal ai stylist.
 
 Wardrobe AI helps users organize their clothing digitally and generate personalized outfit recommendations based on weather, location, occasion, and mood.
 
